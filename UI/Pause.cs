@@ -6,6 +6,6 @@ public class Pause : MonoBehaviour {
 	public GameObject solver;
 
 	public void Freeze () {
-		solver.GetComponent<Solver> ().StopSignal ();
+		solver.GetComponent<Solver> ().StopSolve ();
 	}
 }
