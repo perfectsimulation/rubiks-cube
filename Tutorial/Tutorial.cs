@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
@@ -7,15 +7,25 @@ using UnityEngine.UI;
 public class Tutorial : MonoBehaviour {
 
 	#region Properties
+
+	// The GameObject variable |solver| contains the script to scramble and solve the Rubik's Cube.
 	public GameObject solver;
+
+	// The Text variable |tutor| is the main feature of the tutorial. It displays the instructions.
 	public Text tutor;
+
 	public Camera cam;
+
+	// The GameObject variable |keyboard| is used to display sprites of the buttons required to
+	// manipulate the Rubik's Cube.
 	public GameObject keyboard;
+
+	// The following Material variables are used to emphasize groups of pieces of the Rubik's Cube
+	// to facilitate pattern recognition.
 	public Material plastic;
 	public Material glow;
 	public Material any;
 
-	private Animator keyboardAnimator;
 	public Sprite key_none;
 	public Sprite key_f;
 	public Sprite key_fi;
@@ -30,22 +40,26 @@ public class Tutorial : MonoBehaviour {
 	public Sprite key_b;
 	public Sprite key_bi;
 
+	// The following GameObject variables are used to display the sprites showing key configurations of
+	// the Rubik's Cube.
 	public GameObject summaryDone;
 	public GameObject summary1;
 	public GameObject summary2;
 	public GameObject summary3;
 	public GameObject summary4;
+	public GameObject config1of3;
+	public GameObject config2of3;
+	public GameObject config3of3;
 
+	// The following Text variables are used to display the algorithms necessary to solve the Rubik's
+	// Cube for corresponding configurations.
 	public Text summaryDoneText;
 	public Text summary1Text;
 	public Text summary2Text;
 	public Text summary3Text;
 	public Text summary4Text;
 
-	public GameObject config1of3;
-	public GameObject config2of3;
-	public GameObject config3of3;
-
+	// The following Sprite variables are used with the summary variables above.
 	public Sprite state1_1a;
 	public Sprite state1_1b;
 	public Sprite state1done;
@@ -71,6 +85,7 @@ public class Tutorial : MonoBehaviour {
 	public Sprite state6_3b;
 	public Sprite state6done;
 
+	// The following GameObject variables ending with "face" are used for their Bounds to make the correct rotation.
 	public GameObject f_face;
 	public GameObject d_face;
 	public GameObject r_face;
@@ -78,6 +93,8 @@ public class Tutorial : MonoBehaviour {
 	public GameObject l_face;
 	public GameObject b_face;
 
+	// The following Bounds variables ending in "bounds" are used to determine which pieces to rotate for a
+	// given rotation.
 	private Bounds f_bounds;
 	private Bounds d_bounds;
 	private Bounds r_bounds;
@@ -85,6 +102,7 @@ public class Tutorial : MonoBehaviour {
 	private Bounds l_bounds;
 	private Bounds b_bounds;
 
+	// The following GameObject variables beginning with "cube" are the pieces of the Rubik's Cube.
 	public GameObject cube00;
 	public GameObject cube01;
 	public GameObject cube02;
@@ -141,6 +159,7 @@ public class Tutorial : MonoBehaviour {
 	private Material[] original25;
 	private Material[] original26;
 
+	// The following int variables represent the rotations of the Rubik's Cube.
 	private int f;
 	private int fi;
 	private int d;
@@ -154,24 +173,35 @@ public class Tutorial : MonoBehaviour {
 	private int b;
 	private int bi;
 
+	// The int variable |tutorialStep| is used to display the correct instructions and animations
+	// during the tutorial.
+	// The bool variable |stepDone| is used to ensure the animations of a particular step are not done
+	// more than once.
 	private int tutorialStep = 0;
 	private bool stepDone = false;
 
-	private Quaternion whiteSideUp;
+	// The bool variable |upSwap| is the bool associated with a GetButtonDown method to flip the view of
+	// the Rubik's Cube upside down.
+	// The bool variable |doUpSwap| becomes true when <upSwap> becomes true. It prevents multiple flips.
+	// The int variable |sunnySideUp| is used as a reference to the current side of the Rubik's Cube that
+	// is facing up. Its value will either be 1 for the White side up, and -1 for the Yellow side up.
+	// The Quaternion variable |whiteSideUp| contains the rotation of the Rubik's Cube's solved
+	// configuration, with the White side facing up.
 	private bool upSwap;
 	private bool doUpSwap = false;
 	private int sunnySideUp = 1;
+	private Quaternion whiteSideUp;
+
+	// The int variable |faceConfig| represents the current F side of the Rubik's Cube according to
+	// the camera view.
 	private int faceConfig = 0;
 
+	// The following List<GameObject> variables contain groups of pieces.
 	private List<GameObject> allFaces = new List<GameObject> ();
 	private List<GameObject> sortedFacesBlue = new List<GameObject> ();
 	private List<GameObject> sortedFacesOrange = new List<GameObject> ();
 	private List<GameObject> sortedFacesGreen = new List<GameObject> ();
 	private List<GameObject> sortedFacesRed = new List<GameObject> ();
-
-	private static List<Vector3> refFacePositions = new List<Vector3> ();
-	private List<Bounds> allFacesBounds = new List<Bounds> ();
-	private List<Bounds> sortedBounds = new List<Bounds> ();
 
 	private List<GameObject> allCubes = new List<GameObject> ();
 	private List<GameObject> edgeCubes = new List<GameObject> ();
@@ -185,10 +215,18 @@ public class Tutorial : MonoBehaviour {
 	private List<GameObject> yellowCorners = new List<GameObject> ();
 	private List<GameObject> topLayer = new List<GameObject> ();
 
+	// The following List variables are used to manipulate the sides of the Rubik's Cube if the
+	// the Cube is turned upside down, or rotated to a different camera view.
+	private static List<Vector3> refFacePositions = new List<Vector3> ();
+	private List<Bounds> allFacesBounds = new List<Bounds> ();
+	private List<Bounds> sortedBounds = new List<Bounds> ();
+
 	#endregion
 
+	/// <summary>
+	/// Start this instance by populating the List properties.
+	/// </summary>
 	void Start () {
-
 		allFaces.Add (f_face);
 		allFaces.Add (d_face);
 		allFaces.Add (r_face);
@@ -370,6 +408,9 @@ public class Tutorial : MonoBehaviour {
 		topLayer.Add (cube03);
 	}
 
+	/// <summary>
+	/// Go back a step in the tutorial.
+	/// </summary>
 	public void Previous () {
 		if (!solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 			if (tutorialStep > 0) {
@@ -379,6 +420,9 @@ public class Tutorial : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Go forward a step in the tutorial.
+	/// </summary>
 	public void Next () {
 		if (!solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 			tutorialStep += 1;
@@ -386,14 +430,16 @@ public class Tutorial : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Update this instance. Flips the Rubik's Cube if the user presses the spacebar.
+	/// Configures the rotation int variables according to the camera view. Displays the summary
+	/// of a phase upon completion.
+	/// </summary>
 	void Update () {
 		doUpSwap = Input.GetButtonDown ("Jump");
 		if (doUpSwap) {
 			StartCoroutine (SwapTopView ());
 		}
-//		float y = cam.transform.rotation.eulerAngles.y;
-//		y = (y > 180) ? y - 360 : y;
-//		StartCoroutine (FaceSwap (y));
 		faceConfig = cam.GetComponent<TutorialCamera> ().GetFaceConfig ();
 		StartCoroutine (FaceSwap ());
 		ConfigureMoves ();
@@ -401,6 +447,9 @@ public class Tutorial : MonoBehaviour {
 		StartCoroutine (Steps ());
 	}
 
+	/// <summary>
+	/// Starts a coroutine to reconfigure the sorted lists of sides.
+	/// </summary>
 	IEnumerator FaceSwap () {
 		while (solver.GetComponent<TutorialSolver> ().IsTurning ()) {
 			yield return null;
@@ -409,6 +458,10 @@ public class Tutorial : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Resorts the List variables containing the pieces of each side, according to the camera view.
+	/// </summary>
+	/// <param name="y">The y coordinate of the camera.</param>
 	void UserFace (float y) {
 		if ((y >= 45f) && (y < 135f)) {
 			faceConfig = (sunnySideUp > 0) ? 0 : 1;
@@ -453,6 +506,10 @@ public class Tutorial : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Sorts the bounds according to the camera view. The property |sortedBounds| contains the Bounds
+	/// of sides in the following order: F D R U L B
+	/// </summary>
 	void SortBounds () {
 
 		sortedBounds.Clear ();
@@ -462,6 +519,9 @@ public class Tutorial : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Configures the moves according to the camera view.
+	/// </summary>
 	void ConfigureMoves () {
 		switch (faceConfig) {
 		case 0:
@@ -579,6 +639,9 @@ public class Tutorial : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Displays a summary at the end of each phase.
+	/// </summary>
 	void Summary () {
 		switch (tutorialStep) {
 		case 54:
@@ -675,6 +738,10 @@ public class Tutorial : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Gets the instruction to display for the current tutorial step.
+	/// </summary>
+	/// <returns>The instruction.</returns>
 	string GetInstruction () {
 		switch (tutorialStep) {
 		case 0:
@@ -938,7 +1005,9 @@ public class Tutorial : MonoBehaviour {
 		return null;
 	}
 
-	//fix algorithm lists
+	/// <summary>
+	/// Performs the current tutorial step. The main method of this script.
+	/// </summary>
 	IEnumerator Steps () {
 		List<GameObject> faceCubes;
 		string instruction = GetInstruction ();
@@ -2814,6 +2883,10 @@ public class Tutorial : MonoBehaviour {
 
 
 	#region Groups
+
+	/// <summary>
+	/// Shows only the Front side pieces.
+	/// </summary>
 	void Front () {
 		AnyColors ();
 		List<GameObject> faceCubes = GetFaceCubes (sortedBounds [0]);
@@ -2822,6 +2895,9 @@ public class Tutorial : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Shows only the Down side pieces.
+	/// </summary>
 	void Down () {
 		AnyColors ();
 		List<GameObject> faceCubes = GetFaceCubes (sortedBounds [1]);
@@ -2830,6 +2906,9 @@ public class Tutorial : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Shows only the Right side pieces.
+	/// </summary>
 	void Right () {
 		AnyColors ();
 		List<GameObject> faceCubes = GetFaceCubes (sortedBounds [2]);
@@ -2838,6 +2917,9 @@ public class Tutorial : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Shows only the Up side pieces.
+	/// </summary>
 	void Up () {
 		AnyColors ();
 		List<GameObject> faceCubes = GetFaceCubes (sortedBounds [3]);
@@ -2846,6 +2928,9 @@ public class Tutorial : MonoBehaviour {
 		}
 	}
 		
+	/// <summary>
+	/// Shows only the Left side pieces.
+	/// </summary>
 	void Left () {
 		AnyColors ();
 		List<GameObject> faceCubes = GetFaceCubes (sortedBounds [4]);
@@ -2854,6 +2939,9 @@ public class Tutorial : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Shows only the Back side pieces.
+	/// </summary>
 	void Back () {
 		AnyColors ();
 		List<GameObject> faceCubes = GetFaceCubes (sortedBounds [5]);
@@ -2862,8 +2950,9 @@ public class Tutorial : MonoBehaviour {
 		}
 	}
 
-
-
+	/// <summary>
+	/// Shows the Center pieces.
+	/// </summary>
 	void CenterCubes () {
 		ResetColors (cube05);
 		ResetColors (cube11);
@@ -2872,7 +2961,10 @@ public class Tutorial : MonoBehaviour {
 		ResetColors (cube17);
 		ResetColors (cube23);
 	}
-	
+
+	/// <summary>
+	/// Shows the Edge pieces.
+	/// </summary>
 	void EdgeCubes () {
 		ResetColors (cube02);
 		ResetColors (cube04);
@@ -2888,6 +2980,9 @@ public class Tutorial : MonoBehaviour {
 		ResetColors (cube26);
 	}
 
+	/// <summary>
+	/// Shows the Corner pieces.
+	/// </summary>
 	void CornerCubes () {
 		ResetColors (cube00);
 		ResetColors (cube01);
@@ -2899,6 +2994,9 @@ public class Tutorial : MonoBehaviour {
 		ResetColors (cube25);
 	}
 
+	/// <summary>
+	/// Shows the White Cross pieces.
+	/// </summary>
 	void WhiteCross () {
 		ResetColors (cube23);
 		ResetColors (cube11);
@@ -2911,6 +3009,9 @@ public class Tutorial : MonoBehaviour {
 		ResetColors (cube22);
 	}
 
+	/// <summary>
+	/// Shows the White Corners pieces.
+	/// </summary>
 	void WhiteCorners () {
 		ResetColors (cube23);
 		ResetColors (cube11);
@@ -2927,6 +3028,9 @@ public class Tutorial : MonoBehaviour {
 		ResetColors (cube19);
 	}
 
+	/// <summary>
+	/// Shows the Middle Layer pieces.
+	/// </summary>
 	void MiddleLayer () {
 		ResetColors (cube23);
 		ResetColors (cube11);
@@ -2947,6 +3051,9 @@ public class Tutorial : MonoBehaviour {
 		ResetColors (cube10);
 	}
 
+	/// <summary>
+	/// Shows the Yellow Cross pieces.
+	/// </summary>
 	void YellowCross () {
 		MiddleLayer ();
 		ResetColors (cube05);
@@ -2970,6 +3077,9 @@ public class Tutorial : MonoBehaviour {
 
 	}
 
+	/// <summary>
+	/// Shows the Yellow Corners pieces.
+	/// </summary>
 	void YellowCorners () {
 		YellowCross ();
 		ResetColors (cube07);
@@ -2991,6 +3101,9 @@ public class Tutorial : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Shows the Top Layer pieces.
+	/// </summary>
 	void TopLayer () {
 		YellowCross ();
 		ResetColors (cube07);
@@ -3000,6 +3113,9 @@ public class Tutorial : MonoBehaviour {
 	}
 	#endregion
 
+	/// <summary>
+	/// Changes all colors of the Rubik's Cube to gray.
+	/// </summary>
 	void AnyColors () {
 		ResetColors ();
 		foreach (GameObject cube in allCubes) {
@@ -3015,6 +3131,9 @@ public class Tutorial : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Resets the colors of the entire Rubik's Cube.
+	/// </summary>
 	void ResetColors () {
 		foreach (GameObject cube in allCubes) {
 			string cubeNum = cube.name.Substring (5);
@@ -3023,12 +3142,21 @@ public class Tutorial : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Resets the colors of one piece.
+	/// </summary>
+	/// <param name="cube">Cube.</param>
 	void ResetColors (GameObject cube) {
 		string cubeNum = cube.name.Substring (5);
 		Material[] mats = GetOriginalColors (cubeNum);
 		cube.GetComponent<Renderer> ().materials = mats;
 	}
 
+	/// <summary>
+	/// Gets the original colors of a piece. Used to reset the colors.
+	/// </summary>
+	/// <returns>The original colors of a piece.</returns>
+	/// <param name="cubeIndex">Piece index.</param>
 	Material[] GetOriginalColors (string cubeIndex) {
 		switch (cubeIndex) {
 		case "00":
@@ -3116,6 +3244,9 @@ public class Tutorial : MonoBehaviour {
 		return original00;
 	}
 
+	/// <summary>
+	/// Turns glow off for all pieces.
+	/// </summary>
 	void GlowOff () {
 		foreach (GameObject cube in allCubes) {
 			Material[] mats = cube.GetComponent<Renderer> ().materials;
@@ -3130,6 +3261,10 @@ public class Tutorial : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Turns glow on for pieces of a given side.
+	/// </summary>
+	/// <param name="bound">Bounds of the desired side.</param>
 	void GlowOn (Bounds bound) {
 		List<GameObject> faceCubes = GetFaceCubes (bound);
 		foreach (GameObject cube in faceCubes) {
@@ -3145,6 +3280,10 @@ public class Tutorial : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Turns glow on for one piece.
+	/// </summary>
+	/// <param name="cube">Cube.</param>
 	void GlowOn (GameObject cube) {
 		Material[] mats = cube.GetComponent<Renderer> ().materials;
 		int i = 0;
@@ -3157,6 +3296,11 @@ public class Tutorial : MonoBehaviour {
 		cube.GetComponent<Renderer> ().materials = mats;
 	}
 
+	/// <summary>
+	/// Gets the pieces on a given side.
+	/// </summary>
+	/// <returns>The pieces on a given side.</returns>
+	/// <param name="bound">Bounds of the desired side.</param>
 	List<GameObject> GetFaceCubes(Bounds bound) {
 		List<GameObject> faceCubes = new List<GameObject> ();
 		List<Vector3> allCubesCenters = GetCubesCenters ();
@@ -3169,6 +3313,10 @@ public class Tutorial : MonoBehaviour {
 		return faceCubes;
 	}
 
+	/// <summary>
+	/// Gets the pieces' center positions. Used to determine which pieces are on which sides.
+	/// </summary>
+	/// <returns>The pieces' centers.</returns>
 	List<Vector3> GetCubesCenters () {
 		List<Vector3> allCubesCenters = new List<Vector3> ();
 		foreach (GameObject cube in allCubes) {
@@ -3178,6 +3326,10 @@ public class Tutorial : MonoBehaviour {
 		return allCubesCenters;
 	}
 
+	/// <summary>
+	/// Reverts the Rubik's Cube to the completely solved configuration. 
+	/// Flips the Rubik's Cube back to the White side up, if it isn't already.
+	/// </summary>
 	void ResetCube () {
 		if (sunnySideUp < 1) {
 			StartCoroutine (SwapTopView ());
@@ -3187,11 +3339,19 @@ public class Tutorial : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Used to update the variables describing the top side of the Rubik's Cube.
+	/// </summary>
 	void SetSideUp () {
 		doUpSwap = false;
 		sunnySideUp *= -1;
 	}
 
+	/// <summary>
+	/// Swaps the top view of the Rubik's Cube.
+	/// Reconfigures the rotation int variables according to the new camera view.
+	/// Changes the transforms of the sides to match the new camera view.
+	/// </summary>
 	IEnumerator SwapTopView () {
 		while (solver.GetComponent<TutorialSolver> ().IsTurning ()) {
 			yield return null;
@@ -3207,6 +3367,9 @@ public class Tutorial : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Sets the face transforms whenever the Rubik's Cube is flipped upside down.
+	/// </summary>
 	void SetFaceTransforms () {
 		Vector3 oldFpos = allFaces [0].transform.position;
 		allFaces [0].transform.position = allFaces [5].transform.position;
@@ -3216,13 +3379,9 @@ public class Tutorial : MonoBehaviour {
 		allFaces [2].transform.position = allFaces [4].transform.position;
 		allFaces [4].transform.position = oldRpos;
 
-
 		for (int i = 0; i < allFaces.Count; i++) {
 			allFacesBounds [i] = allFaces [i].GetComponent<MeshCollider> ().bounds;
 		}
-
-
-
 
 		f_bounds = allFacesBounds [5];
 		d_bounds = allFacesBounds [1];
@@ -3232,28 +3391,47 @@ public class Tutorial : MonoBehaviour {
 		b_bounds = allFacesBounds [0];
 	}
 
-
-
+	/// <summary>
+	/// Prints the current tutorial step. Used for debugging.
+	/// </summary>
 	public void Test () {
 		print (tutorialStep);
 	}
 
+	/// <summary>
+	/// Skips to a particular phase. Used for debugging.
+	/// </summary>
 	public void SkipToPhaseII () {
 		tutorialStep = 138;
 	}
 
+	/// <summary>
+	/// Gets the face configuration according to the camera view.
+	/// </summary>
+	/// <returns>The face configuration.</returns>
 	public int GetFaceConfig () {
 		return faceConfig;
 	}
 
+	/// <summary>
+	/// Gets the side facing up.
+	/// </summary>
+	/// <returns>The up side.</returns>
 	public int GetUpFace () {
 		return sunnySideUp;
 	}
 
+	/// <summary>
+	/// Gets the tutorial step.
+	/// </summary>
+	/// <returns>The tutorial step.</returns>
 	public int GetTutorialStep () {
 		return tutorialStep;
 	}
 
+	/// <summary>
+	/// Ends the tutorial. Changes the scene to the main scene.
+	/// </summary>
 	public void EndTutorial () {
 		SceneManager.LoadScene ("_main");
 	}
