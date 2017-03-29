@@ -1,8 +1,15 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// This class animates its associated GameObject to show the user a hint to make a counterclockwise
+/// turn on the Purple side.
+/// </summary>
 public class Glide_Lccw : MonoBehaviour {
 
+	/// <summary>
+	/// Update this instance by "animating" the GameObject this MonoBehaviour is attached to.
+	/// </summary>
 	void Update () {
 		Vector3 current = this.transform.position;
 		Vector3 target1 = new Vector3 (1.5f, -1.5f, current.z);
