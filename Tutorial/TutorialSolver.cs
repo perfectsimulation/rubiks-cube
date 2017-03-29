@@ -1,17 +1,29 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+/// <summary>
+/// This class contains methods to manipulate the Rubik's Cube during the tutorial.
+/// </summary>
 public class TutorialSolver : MonoBehaviour {
 
 	#region Properties
+
+	// The bool variable |turning| indicates whether or not any side of the Rubik's Cube is currently rotating.
+	// The bool variable |solving| indicates whether or not this class is actively performing a solution.
 	private bool turning = false;
 	private bool solving = false;
+
+	// The float variable |speed| is the speed with which the animated rotations are made.
+	// The float variable |turnWait| is the time in seconds to pause between single rotations. 
 	public float speed = 100f;
 	private float turnWait = 0.4f;
 
+	// The GameObject variable |rubiksCube| is the entire Rubik's Cube as a whole.
 	public GameObject rubiksCube;
 
+	// The following GameObject variables ending with "face" are used for their Bounds to make the correct rotation.
+	// They represent the sides of the Rubik's Cube.
 	public GameObject f_face;
 	public GameObject d_face;
 	public GameObject r_face;
@@ -19,6 +31,8 @@ public class TutorialSolver : MonoBehaviour {
 	public GameObject l_face;
 	public GameObject b_face;
 
+	// The following Bounds variables ending in "bounds" are used to determine which pieces to rotate for a
+	// given rotation.
 	private Bounds f_bounds;
 	private Bounds d_bounds;
 	private Bounds r_bounds;
@@ -26,6 +40,7 @@ public class TutorialSolver : MonoBehaviour {
 	private Bounds l_bounds;
 	private Bounds b_bounds;
 
+	// The following GameObject variables beginning with "cube" are the pieces of the Rubik's Cube.
 	public GameObject cube00;
 	public GameObject cube01;
 	public GameObject cube02;
@@ -54,17 +69,32 @@ public class TutorialSolver : MonoBehaviour {
 	public GameObject cube25;
 	public GameObject cube26;
 
+	// The bool variable |upSwap| is the bool associated with a GetButtonDown method to flip the view of
+	// the Rubik's Cube upside down.
+	// The bool variable |doUpSwap| becomes true when <upSwap> becomes true. It prevents multiple flips.
+	// The int variable |sunnySideUp| is used as a reference to the current side of the Rubik's Cube that
+	// is facing up. Its value will either be 1 for the White side up, and -1 for the Yellow side up.
 	private bool upSwap;
 	private bool doUpSwap = false;
 	private int sunnySideUp = 1;
 
+	// The List<GameObject> variable |allCubes| contains all pieces of the Rubik's Cube.
+	// The List<GameObject> variable |faceCubes| is populated with the pieces on a given side.
 	private List<GameObject> allCubes  = new List<GameObject> ();
-	private List<Vector3> allCubesCenters = new List<Vector3> ();
 	private List<GameObject> allFaces  = new List<GameObject> ();
+
+	// The List<Vector3> variable |allCubesCenters| contains all the piece center positions.
+	// The List<Bounds> variable |allFacesBounds| contains all the "bounds" Bounds variables.
+	private List<Vector3> allCubesCenters = new List<Vector3> ();
 	private List<Bounds> allFacesBounds = new List<Bounds> ();
+
+	// The List<int> variable |moves| contains all the rotations that have been made.
 	private List<int> moves = new List<int> ();
 	#endregion
 
+	/// <summary>
+	/// Start this instance by populating List properties.
+	/// </summary>
 	void Start () {
 
 		allFaces.Add (f_face);
@@ -117,6 +147,9 @@ public class TutorialSolver : MonoBehaviour {
 		allCubes.Add (cube26);
 	}
 
+	/// <summary>
+	/// Update this instance by checking if the user has pressed the Button to flip the Rubik's Cube.
+	/// </summary>
 	void Update () {
 		upSwap = Input.GetButtonDown ("Jump");
 		sunnySideUp = rubiksCube.GetComponent<Tutorial> ().GetUpFace ();
@@ -131,10 +164,12 @@ public class TutorialSolver : MonoBehaviour {
 
 	#region Turn Mechanisms
 
-	// Each turn mechanism is identical, except by the axis of rotation.
-	// The following summary equally applies to each of the twelve mechanisms.
-	//
-
+	/// <summary>
+	/// Rotates the F side clockwise.
+	/// </summary>
+	/// <remarks>
+	/// This is an iterator in order to "animate" the rotation.
+	/// </remarks>
 	IEnumerator F__cw () {
 
 		float angle = 0;
@@ -167,6 +202,12 @@ public class TutorialSolver : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Rotates the F side counterclockwise.
+	/// </summary>
+	/// <remarks>
+	/// This is an iterator in order to "animate" the rotation.
+	/// </remarks>
 	IEnumerator F_ccw () {
 
 		float angle = 0;
@@ -199,6 +240,12 @@ public class TutorialSolver : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Rotates the D side clockwise.
+	/// </summary>
+	/// <remarks>
+	/// This is an iterator in order to "animate" the rotation.
+	/// </remarks>
 	IEnumerator D__cw () {
 
 		float angle = 0;
@@ -222,6 +269,12 @@ public class TutorialSolver : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Rotates the D side counterclockwise.
+	/// </summary>
+	/// <remarks>
+	/// This is an iterator in order to "animate" the rotation.
+	/// </remarks>
 	IEnumerator D_ccw () {
 
 		float angle = 0;
@@ -245,6 +298,12 @@ public class TutorialSolver : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Rotates the R side clockwise.
+	/// </summary>
+	/// <remarks>
+	/// This is an iterator in order to "animate" the rotation.
+	/// </remarks>
 	IEnumerator R__cw () {
 
 		float angle = 0;
@@ -277,6 +336,12 @@ public class TutorialSolver : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Rotates the R side counterclockwise.
+	/// </summary>
+	/// <remarks>
+	/// This is an iterator in order to "animate" the rotation.
+	/// </remarks>
 	IEnumerator R_ccw () {
 
 		float angle = 0;
@@ -309,6 +374,12 @@ public class TutorialSolver : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Rotates the U side clockwise.
+	/// </summary>
+	/// <remarks>
+	/// This is an iterator in order to "animate" the rotation.
+	/// </remarks>
 	IEnumerator U__cw () {
 
 		float angle = 0;
@@ -332,6 +403,12 @@ public class TutorialSolver : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Rotates the U side counterclockwise.
+	/// </summary>
+	/// <remarks>
+	/// This is an iterator in order to "animate" the rotation.
+	/// </remarks>
 	IEnumerator U_ccw () {
 
 		float angle = 0;
@@ -355,6 +432,12 @@ public class TutorialSolver : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Rotates the L side clockwise.
+	/// </summary>
+	/// <remarks>
+	/// This is an iterator in order to "animate" the rotation.
+	/// </remarks>
 	IEnumerator L__cw () {
 
 		float angle = 0;
@@ -387,6 +470,12 @@ public class TutorialSolver : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Rotates the L side counterclockwise.
+	/// </summary>
+	/// <remarks>
+	/// This is an iterator in order to "animate" the rotation.
+	/// </remarks>
 	IEnumerator L_ccw () {
 
 		float angle = 0;
@@ -419,6 +508,12 @@ public class TutorialSolver : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Rotates the B side clockwise.
+	/// </summary>
+	/// <remarks>
+	/// This is an iterator in order to "animate" the rotation.
+	/// </remarks>
 	IEnumerator B__cw () {
 
 		float angle = 0;
@@ -451,6 +546,12 @@ public class TutorialSolver : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Rotates the B side counterclockwise.
+	/// </summary>
+	/// <remarks>
+	/// This is an iterator in order to "animate" the rotation.
+	/// </remarks>
 	IEnumerator B_ccw () {
 
 		float angle = 0;
@@ -484,6 +585,11 @@ public class TutorialSolver : MonoBehaviour {
 	}
 	#endregion
 
+	/// <summary>
+	/// Gets the pieces on a given side.
+	/// </summary>
+	/// <returns>The pieces on a given side.</returns>
+	/// <param name="bound">The side.</param>
 	List<GameObject> GetFaceCubes(Bounds bound) {
 		List<GameObject> faceCubes = new List<GameObject> ();
 		allCubesCenters = GetCubesCenters ();
@@ -497,6 +603,10 @@ public class TutorialSolver : MonoBehaviour {
 		return faceCubes;
 	}
 
+	/// <summary>
+	/// Gets the centers of the pieces.
+	/// </summary>
+	/// <returns>The centers of the pieces.</returns>
 	List<Vector3> GetCubesCenters () {
 		allCubesCenters.Clear ();
 		foreach (GameObject cube in allCubes) {
@@ -506,7 +616,9 @@ public class TutorialSolver : MonoBehaviour {
 		return allCubesCenters;
 	}
 
-
+	/// <summary>
+	/// Sets the face transforms according to the faceConfig.
+	/// </summary>
 	public void SetFaceTransforms () {
 
 //		Vector3 oldFpos = allFaces [0].transform.position;
@@ -530,7 +642,10 @@ public class TutorialSolver : MonoBehaviour {
 		b_bounds = allFacesBounds [5];
 	}
 
-
+	/// <summary>
+	/// Perform the specified algorithm.
+	/// </summary>
+	/// <param name="algorithm">Algorithm.</param>
 	public IEnumerator Algorithm (List<int> algorithm) {
 		solving = true;
 		foreach (int move in algorithm) {
@@ -626,14 +741,26 @@ public class TutorialSolver : MonoBehaviour {
 		solving = false;
 	}
 
+	/// <summary>
+	/// Gets the side facing up.
+	/// </summary>
+	/// <returns>The side facing up.</returns>
 	public int GetUpFace () {
 		return sunnySideUp;
 	}
 
+	/// <summary>
+	/// Determines whether this instance is turning.
+	/// </summary>
+	/// <returns><c>true</c> if this instance is turning; otherwise, <c>false</c>.</returns>
 	public bool IsTurning () {
 		return turning;
 	}
 
+	/// <summary>
+	/// Determines whether this instance is solving.
+	/// </summary>
+	/// <returns><c>true</c> if this instance is solving; otherwise, <c>false</c>.</returns>
 	public bool IsSolving () {
 		return solving;
 	}
