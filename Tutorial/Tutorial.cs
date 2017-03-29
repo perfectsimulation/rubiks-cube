@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/// <summary>
+/// This class contains methods to provide a step-by-step approach to solving a Rubik's Cube.
+/// </summary>
 public class Tutorial : MonoBehaviour {
 
 	#region Properties
@@ -1068,7 +1071,7 @@ public class Tutorial : MonoBehaviour {
 				keyboard.GetComponent<SpriteRenderer> ().sprite = key_f;
 				List<int> moves = new List<int> ();
 				moves.Add (f);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -1085,7 +1088,7 @@ public class Tutorial : MonoBehaviour {
 				keyboard.GetComponent<SpriteRenderer> ().sprite = key_fi;
 				List<int> moves = new List<int> ();
 				moves.Add (fi);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -1102,7 +1105,7 @@ public class Tutorial : MonoBehaviour {
 				keyboard.GetComponent<SpriteRenderer> ().sprite = key_b;
 				List<int> moves = new List<int> ();
 				moves.Add (b);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -1119,7 +1122,7 @@ public class Tutorial : MonoBehaviour {
 				keyboard.GetComponent<SpriteRenderer> ().sprite = key_bi;
 				List<int> moves = new List<int> ();
 				moves.Add (bi);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -1136,7 +1139,7 @@ public class Tutorial : MonoBehaviour {
 				keyboard.GetComponent<SpriteRenderer> ().sprite = key_u;
 				List<int> moves = new List<int> ();
 				moves.Add (u);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -1153,7 +1156,7 @@ public class Tutorial : MonoBehaviour {
 				keyboard.GetComponent<SpriteRenderer> ().sprite = key_ui;
 				List<int> moves = new List<int> ();
 				moves.Add (ui);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -1170,7 +1173,7 @@ public class Tutorial : MonoBehaviour {
 				keyboard.GetComponent<SpriteRenderer> ().sprite = key_d;
 				List<int> moves = new List<int> ();
 				moves.Add (d);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -1187,7 +1190,7 @@ public class Tutorial : MonoBehaviour {
 				keyboard.GetComponent<SpriteRenderer> ().sprite = key_di;
 				List<int> moves = new List<int> ();
 				moves.Add (di);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -1204,7 +1207,7 @@ public class Tutorial : MonoBehaviour {
 				keyboard.GetComponent<SpriteRenderer> ().sprite = key_r;
 				List<int> moves = new List<int> ();
 				moves.Add (r);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -1221,7 +1224,7 @@ public class Tutorial : MonoBehaviour {
 				keyboard.GetComponent<SpriteRenderer> ().sprite = key_ri;
 				List<int> moves = new List<int> ();
 				moves.Add (ri);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -1238,7 +1241,7 @@ public class Tutorial : MonoBehaviour {
 				keyboard.GetComponent<SpriteRenderer> ().sprite = key_l;
 				List<int> moves = new List<int> ();
 				moves.Add (l);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -1257,7 +1260,7 @@ public class Tutorial : MonoBehaviour {
 				keyboard.GetComponent<SpriteRenderer> ().sprite = key_li;
 				List<int> moves = new List<int> ();
 				moves.Add (li);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -1295,7 +1298,7 @@ public class Tutorial : MonoBehaviour {
 				moves.Add (u);
 				moves.Add (u);
 				moves.Add (u);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -1356,7 +1359,7 @@ public class Tutorial : MonoBehaviour {
 				ResetColors (cube26);
 				List<int> moves = new List<int> ();
 				moves.Add (fi);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -1374,7 +1377,7 @@ public class Tutorial : MonoBehaviour {
 				ResetColors (cube26);
 				List<int> moves = new List<int> ();
 				moves.Add (d);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -1407,7 +1410,7 @@ public class Tutorial : MonoBehaviour {
 				List<int> moves = new List<int> ();
 				moves.Add (r);
 				moves.Add (r);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -1446,7 +1449,7 @@ public class Tutorial : MonoBehaviour {
 				moves.Add (u);
 				moves.Add (fi);
 				moves.Add (ui);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -1476,7 +1479,7 @@ public class Tutorial : MonoBehaviour {
 //				moves.Add (l);
 //				moves.Add (f);
 //				moves.Add (f);
-//				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+//				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 //				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 //					yield return null;
 //				}
@@ -1507,7 +1510,7 @@ public class Tutorial : MonoBehaviour {
 				solver.GetComponent<TutorialScrambler> ().Tutor_WhiteCross5 ();
 				List<int> moves = new List<int> ();
 				moves.Add (ri);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -1527,7 +1530,7 @@ public class Tutorial : MonoBehaviour {
 				List<int> moves = new List<int> ();
 				moves.Add (r);
 				moves.Add (r);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -1562,7 +1565,7 @@ public class Tutorial : MonoBehaviour {
 				List<int> moves = new List<int> ();
 				moves.Add (r);
 				moves.Add (r);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -1582,7 +1585,7 @@ public class Tutorial : MonoBehaviour {
 				solver.GetComponent<TutorialScrambler> ().Tutor_WhiteCross8 ();
 				List<int> moves = new List<int> ();
 				moves.Add (di);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -1603,7 +1606,7 @@ public class Tutorial : MonoBehaviour {
 				List<int> moves = new List<int> ();
 				moves.Add (r);
 				moves.Add (r);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -1626,7 +1629,7 @@ public class Tutorial : MonoBehaviour {
 				moves.Add (u);
 				moves.Add (fi);
 				moves.Add (ui);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -1675,7 +1678,7 @@ public class Tutorial : MonoBehaviour {
 				moves.Add (d);
 				moves.Add (d);
 				moves.Add (r);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -1702,7 +1705,7 @@ public class Tutorial : MonoBehaviour {
 				solver.GetComponent<TutorialScrambler> ().Tutor_WhiteCross12 ();
 				List<int> moves = new List<int> ();
 				moves.Add (di);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -1720,7 +1723,7 @@ public class Tutorial : MonoBehaviour {
 				List<int> moves = new List<int> ();
 				moves.Add (r);
 				moves.Add (r);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -1854,7 +1857,7 @@ public class Tutorial : MonoBehaviour {
 				moves.Add (ri);
 				moves.Add (d);
 				moves.Add (r);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -1923,7 +1926,7 @@ public class Tutorial : MonoBehaviour {
 				List<int> moves = new List<int> ();
 				moves.Add (d);
 				moves.Add (d);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -1960,7 +1963,7 @@ public class Tutorial : MonoBehaviour {
 				moves.Add (d);
 				moves.Add (d);
 				moves.Add (r);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -2022,7 +2025,7 @@ public class Tutorial : MonoBehaviour {
 				moves.Add (ri);
 				moves.Add (d);
 				moves.Add (r);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -2137,7 +2140,7 @@ public class Tutorial : MonoBehaviour {
 				moves.Add (ri);
 				moves.Add (di);
 				moves.Add (r);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -2198,7 +2201,7 @@ public class Tutorial : MonoBehaviour {
 				List<int> moves = new List<int> ();
 				moves.Add (d);
 				moves.Add (d);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -2223,7 +2226,7 @@ public class Tutorial : MonoBehaviour {
 				moves.Add (ri);
 				moves.Add (d);
 				moves.Add (r);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -2265,7 +2268,7 @@ public class Tutorial : MonoBehaviour {
 				moves.Add (ri);
 				moves.Add (di);
 				moves.Add (r);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -2371,7 +2374,7 @@ public class Tutorial : MonoBehaviour {
 				ResetColors (cube18);
 				List<int> moves = new List<int> ();
 				moves.Add (u);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -2417,7 +2420,7 @@ public class Tutorial : MonoBehaviour {
 				moves.Add (fi);
 				moves.Add (u);
 				moves.Add (f);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -2471,7 +2474,7 @@ public class Tutorial : MonoBehaviour {
 				ResetColors (cube12);
 				List<int> moves = new List<int> ();
 				moves.Add (u);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -2513,7 +2516,7 @@ public class Tutorial : MonoBehaviour {
 				moves.Add (fi);
 				moves.Add (u);
 				moves.Add (f);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -2558,7 +2561,7 @@ public class Tutorial : MonoBehaviour {
 				ResetColors (cube16);
 				List<int> moves = new List<int> ();
 				moves.Add (ui);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -2603,7 +2606,7 @@ public class Tutorial : MonoBehaviour {
 				moves.Add (fi);
 				moves.Add (u);
 				moves.Add (f);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -2643,7 +2646,7 @@ public class Tutorial : MonoBehaviour {
 				List<int> moves = new List<int> ();
 				moves.Add (u);
 				moves.Add (u);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -2669,7 +2672,7 @@ public class Tutorial : MonoBehaviour {
 				moves.Add (f);
 				moves.Add (ui);
 				moves.Add (fi);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
@@ -2711,7 +2714,7 @@ public class Tutorial : MonoBehaviour {
 				moves.Add (fi);
 				moves.Add (u);
 				moves.Add (f);
-				StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (moves));
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
 				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
 					yield return null;
 				}
