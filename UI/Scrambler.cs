@@ -1,16 +1,24 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
 public class Scrambler : MonoBehaviour {
 
 	#region Properties
+
+	// The GameObject variable |solver| contains the script to solve the Rubik's Cube.
+	// The bool variable |solving| is true when |solver| is actively performing a solution animation.
 	public GameObject solver;
 	private bool solving;
 
+	// The GameObject variable |hint| contains the script to enable animations to show the next rotation
+	// the user should perform.
+	// The bool variable |hinting| is true when |hint| is displaying the rotation.
 	public GameObject hint;
 	private bool hinting;
 
+	// The following GameObject variables ending with "face" are used for their Bounds to make the correct rotation.
+	// They represent the sides of the Rubik's Cube.
 	public GameObject f_face;
 	public GameObject d_face;
 	public GameObject r_face;
@@ -18,6 +26,16 @@ public class Scrambler : MonoBehaviour {
 	public GameObject l_face;
 	public GameObject b_face;
 
+	// The following Bounds variables ending in "bounds" are used to determine which pieces to rotate for a
+	// given rotation.
+	private Bounds f_bounds;
+	private Bounds d_bounds;
+	private Bounds r_bounds;
+	private Bounds u_bounds;
+	private Bounds l_bounds;
+	private Bounds b_bounds;
+
+	// The following GameObject variables beginning with "cube" are the pieces of the Rubik's Cube.
 	public GameObject cube00;
 	public GameObject cube01;
 	public GameObject cube02;
@@ -46,13 +64,8 @@ public class Scrambler : MonoBehaviour {
 	public GameObject cube25;
 	public GameObject cube26;
 
-	private Bounds f_bounds;
-	private Bounds d_bounds;
-	private Bounds r_bounds;
-	private Bounds u_bounds;
-	private Bounds l_bounds;
-	private Bounds b_bounds;
-
+	// The following Vector3 variables beginning with "cubeCenter" are the positions of the center of
+	// each piece.
 	private Vector3 cubeCenter_00;
 	private Vector3 cubeCenter_01;
 	private Vector3 cubeCenter_02;
@@ -81,11 +94,17 @@ public class Scrambler : MonoBehaviour {
 	private Vector3 cubeCenter_25;
 	private Vector3 cubeCenter_26;
 
+	// The List<GameObject> variable |allCubes| contains all pieces of the Rubik's Cube.
+	// The List<GameObject> variable |faceCubes| is populated with the pieces on a given side.
+	// The List<Vector3> variable |allCubesCenters| contains all the piece center positions.
 	private List<GameObject> allCubes  = new List<GameObject> ();
 	private List<GameObject> faceCubes = new List<GameObject> ();
 	private List<Vector3> allCubesCenters = new List<Vector3> ();
 	#endregion
 
+	/// <summary>
+	/// Start this instance by populating List properties.
+	/// </summary>
 	void Start () {
 		
 		f_bounds = f_face.GetComponent<MeshCollider> ().bounds;
@@ -124,9 +143,10 @@ public class Scrambler : MonoBehaviour {
 		allCubes.Add (cube26);
 	}
 
-	void Update () {
-	}
-
+	/// <summary>
+	/// Gets the centers of each piece.
+	/// </summary>
+	/// <returns>The centers of each piece.</returns>
 	List<Vector3> GetCubesCenters () {
 		allCubesCenters.Clear ();
 
@@ -189,6 +209,11 @@ public class Scrambler : MonoBehaviour {
 		return allCubesCenters;
 	}
 
+	/// <summary>
+	/// Gets the pieces of s given side.
+	/// </summary>
+	/// <returns>The pieces of a given side.</returns>
+	/// <param name="bound">The desired side.</param>
 	List<GameObject> GetFaceCubes(Bounds bound) {
 		faceCubes.Clear ();
 		allCubesCenters = GetCubesCenters ();
@@ -201,12 +226,18 @@ public class Scrambler : MonoBehaviour {
 		return faceCubes;
 	}
 
+	/// <summary>
+	/// Scramble the Rubik's Cube by performing ten random rotations.
+	/// </summary>
 	public void Scramble () {
 		for (int x = 0; x < 10; x++) {
 			StartCoroutine(Turn ());
 		}
 	}
 
+	/// <summary>
+	/// Perform a rotation of the Rubik's Cube.
+	/// </summary>
 	IEnumerator Turn () {
 		solving = solver.GetComponent<Solver> ().IsSolving ();
 		hinting = hint.GetComponent<Hint> ().IsHinting ();
@@ -258,6 +289,14 @@ public class Scrambler : MonoBehaviour {
 	}
 
 	#region Turn Mechanisms
+
+	/// <summary>
+	/// Rotates the White side clockwise.
+	/// </summary>
+	/// <remarks>
+	/// This is different from turn mechanisms of other scripts. Here, this will always rotate the White side.
+	/// Other scripts with similar methods configure which side to turn based on the camera view.
+	/// </remarks>
 	IEnumerator F__cw () {
 		List<GameObject> faceCubes = GetFaceCubes (f_bounds);
 		foreach (GameObject cube in faceCubes) {
@@ -266,6 +305,13 @@ public class Scrambler : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Rotates the White side counterclockwise.
+	/// </summary>
+	/// <remarks>
+	/// This is different from turn mechanisms of other scripts. Here, this will always rotate the White side.
+	/// Other scripts with similar methods configure which side to turn based on the camera view.
+	/// </remarks>
 	IEnumerator F_ccw () {
 		List<GameObject> faceCubes = GetFaceCubes (f_bounds);
 		foreach (GameObject cube in faceCubes) {
@@ -274,6 +320,13 @@ public class Scrambler : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Rotates the Green side clockwise.
+	/// </summary>
+	/// <remarks>
+	/// This is different from turn mechanisms of other scripts. Here, this will always rotate the Green side.
+	/// Other scripts with similar methods configure which side to turn based on the camera view.
+	/// </remarks>
 	IEnumerator D__cw () {
 		List<GameObject> faceCubes = GetFaceCubes (d_bounds);
 		foreach (GameObject cube in faceCubes) {
@@ -282,6 +335,13 @@ public class Scrambler : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Rotates the Green side counterclockwise.
+	/// </summary>
+	/// <remarks>
+	/// This is different from turn mechanisms of other scripts. Here, this will always rotate the Green side.
+	/// Other scripts with similar methods configure which side to turn based on the camera view.
+	/// </remarks>
 	IEnumerator D_ccw () {
 		List<GameObject> faceCubes = GetFaceCubes (d_bounds);
 		foreach (GameObject cube in faceCubes) {
@@ -290,6 +350,13 @@ public class Scrambler : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Rotates the Red side clockwise.
+	/// </summary>
+	/// <remarks>
+	/// This is different from turn mechanisms of other scripts. Here, this will always rotate the Red side.
+	/// Other scripts with similar methods configure which side to turn based on the camera view.
+	/// </remarks>
 	IEnumerator R__cw () {
 		List<GameObject> faceCubes = GetFaceCubes (r_bounds);
 		foreach (GameObject cube in faceCubes) {
@@ -298,6 +365,13 @@ public class Scrambler : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Rotates the Red side counterclockwise.
+	/// </summary>
+	/// <remarks>
+	/// This is different from turn mechanisms of other scripts. Here, this will always rotate the Red side.
+	/// Other scripts with similar methods configure which side to turn based on the camera view.
+	/// </remarks>
 	IEnumerator R_ccw () {
 		List<GameObject> faceCubes = GetFaceCubes (r_bounds);
 		foreach (GameObject cube in faceCubes) {
@@ -306,6 +380,13 @@ public class Scrambler : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Rotates the Blue side clockwise.
+	/// </summary>
+	/// <remarks>
+	/// This is different from turn mechanisms of other scripts. Here, this will always rotate the Blue side.
+	/// Other scripts with similar methods configure which side to turn based on the camera view.
+	/// </remarks>
 	IEnumerator U__cw () {
 		List<GameObject> faceCubes = GetFaceCubes (u_bounds);
 		foreach (GameObject cube in faceCubes) {
@@ -314,6 +395,13 @@ public class Scrambler : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Rotates the Blue side counterclockwise.
+	/// </summary>
+	/// <remarks>
+	/// This is different from turn mechanisms of other scripts. Here, this will always rotate the Blue side.
+	/// Other scripts with similar methods configure which side to turn based on the camera view.
+	/// </remarks>
 	IEnumerator U_ccw () {
 		List<GameObject> faceCubes = GetFaceCubes (u_bounds);
 		foreach (GameObject cube in faceCubes) {
@@ -322,6 +410,13 @@ public class Scrambler : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Rotates the Purple side clockwise.
+	/// </summary>
+	/// <remarks>
+	/// This is different from turn mechanisms of other scripts. Here, this will always rotate the Purple side.
+	/// Other scripts with similar methods configure which side to turn based on the camera view.
+	/// </remarks>
 	IEnumerator L__cw () {
 		List<GameObject> faceCubes = GetFaceCubes (l_bounds);
 		foreach (GameObject cube in faceCubes) {
@@ -330,6 +425,13 @@ public class Scrambler : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Rotates the Purple side counterclockwise.
+	/// </summary>
+	/// <remarks>
+	/// This is different from turn mechanisms of other scripts. Here, this will always rotate the Purple side.
+	/// Other scripts with similar methods configure which side to turn based on the camera view.
+	/// </remarks>
 	IEnumerator L_ccw () {
 		List<GameObject> faceCubes = GetFaceCubes (l_bounds);
 		foreach (GameObject cube in faceCubes) {
@@ -338,6 +440,13 @@ public class Scrambler : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Rotates the Yellow side clockwise.
+	/// </summary>
+	/// <remarks>
+	/// This is different from turn mechanisms of other scripts. Here, this will always rotate the Yellow side.
+	/// Other scripts with similar methods configure which side to turn based on the camera view.
+	/// </remarks>
 	IEnumerator B__cw () {
 		List<GameObject> faceCubes = GetFaceCubes (b_bounds);
 		foreach (GameObject cube in faceCubes) {
@@ -346,6 +455,13 @@ public class Scrambler : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Rotates the Yellow side counterclockwise.
+	/// </summary>
+	/// <remarks>
+	/// This is different from turn mechanisms of other scripts. Here, this will always rotate the Yellow side.
+	/// Other scripts with similar methods configure which side to turn based on the camera view.
+	/// </remarks>
 	IEnumerator B_ccw () {
 		List<GameObject> faceCubes = GetFaceCubes (b_bounds);
 		foreach (GameObject cube in faceCubes) {
