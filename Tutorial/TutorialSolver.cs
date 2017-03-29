@@ -643,10 +643,10 @@ public class TutorialSolver : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Perform the specified algorithm.
+	/// Performs the specified algorithm.
 	/// </summary>
 	/// <param name="algorithm">Algorithm.</param>
-	public IEnumerator Algorithm (List<int> algorithm) {
+	public IEnumerator PerformAlgorithm (List<int> algorithm) {
 		solving = true;
 		foreach (int move in algorithm) {
 //			print (move);
