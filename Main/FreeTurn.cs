@@ -1,0 +1,423 @@
+﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+
+public class FreeTurn : MonoBehaviour {
+	
+	#region Properties
+	public GameObject solver;
+	private int sunnySideUp;
+
+	public Camera cam;
+	private int faceConfig;
+
+	public GameObject guide_Fcw;
+	public GameObject guide_Fccw;
+	public GameObject guide_Dcw;
+	public GameObject guide_Dccw;
+	public GameObject guide_Rcw;
+	public GameObject guide_Rccw;
+	public GameObject guide_Ucw;
+	public GameObject guide_Uccw;
+	public GameObject guide_Lcw;
+	public GameObject guide_Lccw;
+	public GameObject guide_Bcw;
+	public GameObject guide_Bccw;
+
+	private bool invert;
+	private bool press_F;
+	private bool press_D;
+	private bool press_R;
+	private bool press_U;
+	private bool press_L;
+	private bool press_B;
+
+	private bool do_F  = false;
+	private bool do_Fi = false;
+	private bool do_D  = false;
+	private bool do_Di = false;
+	private bool do_R  = false;
+	private bool do_Ri = false;
+	private bool do_U  = false;
+	private bool do_Ui = false;
+	private bool do_L  = false;
+	private bool do_Li = false;
+	private bool do_B  = false;
+	private bool do_Bi = false;
+
+	private int f;
+	private int fi;
+	private int d;
+	private int di;
+	private int r;
+	private int ri;
+	private int u;
+	private int ui;
+	private int l;
+	private int li;
+	private int b;
+	private int bi;
+	#endregion
+
+	void Update () {
+		sunnySideUp = solver.GetComponent<Solver> ().GetUpFace ();
+		faceConfig = cam.GetComponent<CameraController> ().GetFaceConfig ();
+		ConfigureMoves (faceConfig);
+		#region getButtonDown
+		invert = Input.GetButton ("ccw");
+		press_F  = Input.GetButtonDown ("F");
+		press_D  = Input.GetButtonDown ("D");
+		press_R  = Input.GetButtonDown ("R");
+		press_U  = Input.GetButtonDown ("U");
+		press_L  = Input.GetButtonDown ("L");
+		press_B  = Input.GetButtonDown ("B");
+		#endregion
+
+		// only one turn occurs if multiple buttons are pressed simultaneously
+		#region ifButtonPressed
+		if (press_F) {
+			if (invert) {
+				do_Fi = true;
+				StartCoroutine (Turn ());
+			} else {
+				do_F = true;
+				StartCoroutine (Turn ());
+			}
+		} else if (press_D) {
+			if (sunnySideUp > 0) {
+				if (invert) {
+					do_Di = true;
+					StartCoroutine (Turn ());
+				} else {
+					do_D = true;
+					StartCoroutine (Turn ());
+				}
+			} else if (sunnySideUp < 0) {
+				if (invert) {
+					do_Ui = true;
+					StartCoroutine (Turn ());
+				} else {
+					do_U = true;
+					StartCoroutine (Turn ());
+				}
+			}
+		} else if (press_R) {
+			if (invert) {
+				do_Ri = true;
+				StartCoroutine (Turn ());
+			} else {
+				do_R = true;
+				StartCoroutine (Turn ());
+			}
+		} else if (press_U) {
+			if (sunnySideUp > 0) {
+				if (invert) {
+					do_Ui = true;
+					StartCoroutine (Turn ());
+				} else {
+					do_U = true;
+					StartCoroutine (Turn ());
+				}
+			} else if (sunnySideUp < 0) {
+				if (invert) {
+					do_Di = true;
+					StartCoroutine (Turn ());
+				} else {
+					do_D = true;
+					StartCoroutine (Turn ());
+				}
+			}
+		} else if (press_L) {
+			if (invert) {
+				do_Li = true;
+				StartCoroutine (Turn ());
+			} else {
+				do_L = true;
+				StartCoroutine (Turn ());
+			}
+		} else if (press_B) {
+			if (invert) {
+				do_Bi = true;
+				StartCoroutine (Turn ());
+			} else {
+				do_B = true;
+				StartCoroutine (Turn ());
+			}
+		}
+		#endregion
+	}
+
+	IEnumerator Turn () {
+		while (solver.GetComponent<Solver> ().IsTurning ()) {
+			CancelTurns ();
+			yield return null;
+		}
+		while (solver.GetComponent<Solver> ().IsSolving ()) {
+			CancelTurns ();
+			yield return null;
+		}
+
+
+		PressManager ();
+		int faceConfig = cam.GetComponent<CameraController> ().GetFaceConfig ();
+		ConfigureMoves (faceConfig);
+
+
+		if (do_F) {
+			List<int> turn = new List<int> ();
+			turn.Add (f);
+			StartCoroutine (solver.GetComponent<Solver> ().PerformAlgorithm (turn));
+			do_F = false;
+		}
+		if (do_Fi) {
+			List<int> turn = new List<int> ();
+			turn.Add (fi);
+			StartCoroutine (solver.GetComponent<Solver> ().PerformAlgorithm (turn));
+			do_Fi = false;
+		}
+		if (do_D) {
+			List<int> turn = new List<int> ();
+			turn.Add (d);
+			StartCoroutine (solver.GetComponent<Solver> ().PerformAlgorithm (turn));
+			do_D = false;
+		}
+		if (do_Di) {
+			List<int> turn = new List<int> ();
+			turn.Add (di);
+			StartCoroutine (solver.GetComponent<Solver> ().PerformAlgorithm (turn));
+			do_Di = false;
+		}
+		if (do_R) {
+			List<int> turn = new List<int> ();
+			turn.Add (r);
+			StartCoroutine (solver.GetComponent<Solver> ().PerformAlgorithm (turn));
+			do_R = false;
+		}
+		if (do_Ri) {
+			List<int> turn = new List<int> ();
+			turn.Add (ri);
+			StartCoroutine (solver.GetComponent<Solver> ().PerformAlgorithm (turn));
+			do_Ri = false;
+		}
+		if (do_U) {
+			List<int> turn = new List<int> ();
+			turn.Add (u);
+			StartCoroutine (solver.GetComponent<Solver> ().PerformAlgorithm (turn));
+			do_U = false;
+		}
+		if (do_Ui) {
+			List<int> turn = new List<int> ();
+			turn.Add (ui);
+			StartCoroutine (solver.GetComponent<Solver> ().PerformAlgorithm (turn));
+			do_Ui = false;
+		}
+		if (do_L) {
+			List<int> turn = new List<int> ();
+			turn.Add (l);
+			StartCoroutine (solver.GetComponent<Solver> ().PerformAlgorithm (turn));
+			do_L = false;
+		}
+		if (do_Li) {
+			List<int> turn = new List<int> ();
+			turn.Add (li);
+			StartCoroutine (solver.GetComponent<Solver> ().PerformAlgorithm (turn));
+			do_Li = false;
+		}
+		if (do_B) {
+			List<int> turn = new List<int> ();
+			turn.Add (b);
+			StartCoroutine (solver.GetComponent<Solver> ().PerformAlgorithm (turn));
+			do_B = false;
+		}
+		if (do_Bi) {
+			List<int> turn = new List<int> ();
+			turn.Add (bi);
+			StartCoroutine (solver.GetComponent<Solver> ().PerformAlgorithm (turn));
+			do_Bi = false;
+		}
+
+	}
+
+	void ConfigureMoves (int faceConfig) {
+		switch (faceConfig) {
+		case 0:
+			f  = 6;
+			fi = 7;
+			d  = 11;
+			di = 10;
+			r  = 8;
+			ri = 9;
+			u  = 0;
+			ui = 1;
+			l  = 4;
+			li = 5;
+			b  = 2;
+			bi = 3;
+			break;
+		case 1:
+			f  = 6;
+			fi = 7;
+			d  = 11;
+			di = 10;
+			r  = 4;
+			ri = 5;
+			u  = 0;
+			ui = 1;
+			l  = 8;
+			li = 9;
+			b  = 2;
+			bi = 3;
+			break;
+		case 2:
+			f  = 8;
+			fi = 9;
+			d  = 11;
+			di = 10;
+			r  = 2;
+			ri = 3;
+			u  = 0;
+			ui = 1;
+			l  = 6;
+			li = 7;
+			b  = 4;
+			bi = 5;
+			break;
+		case 3:
+			f  = 4;
+			fi = 5;
+			d  = 11;
+			di = 10;
+			r  = 2;
+			ri = 3;
+			u  = 0;
+			ui = 1;
+			l  = 6;
+			li = 7;
+			b  = 8;
+			bi = 9;
+			break;
+		case 4:
+			f  = 2;
+			fi = 3;
+			d  = 11;
+			di = 10;
+			r  = 4;
+			ri = 5;
+			u  = 0;
+			ui = 1;
+			l  = 8;
+			li = 9;
+			b  = 6;
+			bi = 7;
+			break;
+		case 5:
+			f  = 2;
+			fi = 3;
+			d  = 11;
+			di = 10;
+			r  = 8;
+			ri = 9;
+			u  = 0;
+			ui = 1;
+			l  = 4;
+			li = 5;
+			b  = 6;
+			bi = 7;
+			break;
+		case 6:
+			f  = 4;
+			fi = 5;
+			d  = 11;
+			di = 10;
+			r  = 6;
+			ri = 7;
+			u  = 0;
+			ui = 1;
+			l  = 2;
+			li = 3;
+			b  = 8;
+			bi = 9;
+			break;
+		case 7:
+			f  = 8;
+			fi = 9;
+			d  = 11;
+			di = 10;
+			r  = 6;
+			ri = 7;
+			u  = 0;
+			ui = 1;
+			l  = 2;
+			li = 3;
+			b  = 4;
+			bi = 5;
+			break;
+		}
+	}
+
+	void GuideOff () {
+		guide_Fcw.SetActive (false);
+		guide_Fccw.SetActive (false);
+		guide_Dcw.SetActive (false);
+		guide_Dccw.SetActive (false);
+		guide_Rcw.SetActive (false);
+		guide_Rccw.SetActive (false);
+		guide_Ucw.SetActive (false);
+		guide_Uccw.SetActive (false);
+		guide_Lcw.SetActive (false);
+		guide_Lccw.SetActive (false);
+		guide_Bcw.SetActive (false);
+		guide_Bccw.SetActive (false);
+	}
+
+	// changes all turn signals to false if more than one are true.
+	// this prevents errors from the user pressing buttons too fast, or at the same time.
+	void PressManager () {
+
+		int a = do_F ? 1 : 0;
+		int b = do_Fi ? 1 : 0;
+		int c = do_D ? 1 : 0;
+		int d = do_Di ? 1 : 0;
+		int e = do_R ? 1 : 0;
+		int f = do_Ri ? 1 : 0;
+		int g = do_U ? 1 : 0;
+		int h = do_Ui ? 1 : 0;
+		int i = do_L ? 1 : 0;
+		int j = do_Li ? 1 : 0;
+		int k = do_B ? 1 : 0;
+		int l = do_Bi ? 1 : 0;
+
+		int sum = a + b + c + d + e + f + g + h + i + j + k + l;
+		if (sum > 1) {
+			do_F  = false;
+			do_Fi = false;
+			do_D  = false;
+			do_Di = false;
+			do_R  = false;
+			do_Ri = false;
+			do_U  = false;
+			do_Ui = false;
+			do_L  = false;
+			do_Li = false;
+			do_B  = false;
+			do_Bi = false;
+		}
+	}
+
+	//changes all turn signals to false.
+	void CancelTurns () {
+		do_F  = false;
+		do_Fi = false;
+		do_D  = false;
+		do_Di = false;
+		do_R  = false;
+		do_Ri = false;
+		do_U  = false;
+		do_Ui = false;
+		do_L  = false;
+		do_Li = false;
+		do_B  = false;
+		do_Bi = false;
+	}
+
+}
