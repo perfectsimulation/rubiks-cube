@@ -1,15 +1,27 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+/// <summary>
+/// This class provides methods for the user to apply rotations to the Rubik's Cube.
+/// </summary>
 public class TutorialTurn : MonoBehaviour {
 	
 	#region Properties
+
+	// The GameObject variable |solver| contains the script to scramble and solve the Rubik's Cube.
 	public GameObject solver;
 
+	// The int variable |faceConfig| represents the current F side of the Rubik's Cube according to
+	// the camera view.
 	private int faceConfig;
+
+	// The int variable |sunnySideUp| is used as a reference to the current side of the Rubik's Cube that
+	// is facing up. Its value will either be 1 for the White side up, and -1 for the Yellow side up.
 	private int sunnySideUp;
 
+	// The following bool variables are used with GetButtonDown methods to determine which rotation
+	// the user inputted.
 	private bool invert;
 	private bool press_F;
 	private bool press_D;
@@ -18,6 +30,7 @@ public class TutorialTurn : MonoBehaviour {
 	private bool press_L;
 	private bool press_B;
 
+	// The following bool variables are used to signal that a rotation should be made.
 	private bool do_F  = false;
 	private bool do_Fi = false;
 	private bool do_D  = false;
@@ -31,6 +44,7 @@ public class TutorialTurn : MonoBehaviour {
 	private bool do_B  = false;
 	private bool do_Bi = false;
 
+	// The following int variables represent the rotations of the Rubik's Cube.
 	private int f;
 	private int fi;
 	private int d;
@@ -46,6 +60,10 @@ public class TutorialTurn : MonoBehaviour {
 
 	#endregion
 
+	/// <summary>
+	/// Update this instance by checking for pressed buttons and reconfiguring the rotation int variables
+	/// when the camera view changes.
+	/// </summary>
 	void Update () {
 		sunnySideUp = solver.GetComponent<TutorialSolver> ().GetUpFace ();
 		faceConfig = this.GetComponent<Tutorial> ().GetFaceConfig ();
@@ -134,6 +152,9 @@ public class TutorialTurn : MonoBehaviour {
 		#endregion
 	}
 
+	/// <summary>
+	/// Performs a rotation of the Rubik's Cube.
+	/// </summary>
 	IEnumerator Turn () {
 		while (solver.GetComponent<TutorialSolver> ().IsTurning ()) {
 			CancelTurns ();
@@ -144,78 +165,81 @@ public class TutorialTurn : MonoBehaviour {
 		if (do_F) {
 			List<int> turn = new List<int> ();
 			turn.Add (f);
-			StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (turn));
+			StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (turn));
 			do_F = false;
 		}
 		if (do_Fi) {
 			List<int> turn = new List<int> ();
 			turn.Add (fi);
-			StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (turn));
+			StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (turn));
 			do_Fi = false;
 		}
 		if (do_D) {
 			List<int> turn = new List<int> ();
 			turn.Add (d);
-			StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (turn));
+			StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (turn));
 			do_D = false;
 		}
 		if (do_Di) {
 			List<int> turn = new List<int> ();
 			turn.Add (di);
-			StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (turn));
+			StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (turn));
 			do_Di = false;
 		}
 		if (do_R) {
 			List<int> turn = new List<int> ();
 			turn.Add (r);
-			StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (turn));
+			StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (turn));
 			do_R = false;
 		}
 		if (do_Ri) {
 			List<int> turn = new List<int> ();
 			turn.Add (ri);
-			StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (turn));
+			StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (turn));
 			do_Ri = false;
 		}
 		if (do_U) {
 			List<int> turn = new List<int> ();
 			turn.Add (u);
-			StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (turn));
+			StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (turn));
 			do_U = false;
 		}
 		if (do_Ui) {
 			List<int> turn = new List<int> ();
 			turn.Add (ui);
-			StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (turn));
+			StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (turn));
 			do_Ui = false;
 		}
 		if (do_L) {
 			List<int> turn = new List<int> ();
 			turn.Add (l);
-			StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (turn));
+			StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (turn));
 			do_L = false;
 		}
 		if (do_Li) {
 			List<int> turn = new List<int> ();
 			turn.Add (li);
-			StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (turn));
+			StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (turn));
 			do_Li = false;
 		}
 		if (do_B) {
 			List<int> turn = new List<int> ();
 			turn.Add (b);
-			StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (turn));
+			StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (turn));
 			do_B = false;
 		}
 		if (do_Bi) {
 			List<int> turn = new List<int> ();
 			turn.Add (bi);
-			StartCoroutine (solver.GetComponent<TutorialSolver> ().Algorithm (turn));
+			StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (turn));
 			do_Bi = false;
 		}
 	}
 
-
+	/// <summary>
+	/// Configures the rotation int variables according to the camera view.
+	/// </summary>
+	/// <param name="faceConfig">Face config.</param>
 	void ConfigureMoves (int faceConfig) {
 		switch (faceConfig) {
 		case 0:
@@ -337,8 +361,9 @@ public class TutorialTurn : MonoBehaviour {
 
 
 
-	// changes all turn signals to false if more than one are true.
-	// this prevents errors from the user pressing buttons too fast, or at the same time.
+	/// <summary>
+	/// Manages button presses by the user to negate simultaneous button presses.
+	/// </summary>
 	void PressManager () {
 		
 		int a = do_F ? 1 : 0;
@@ -371,7 +396,9 @@ public class TutorialTurn : MonoBehaviour {
 		}
 	}
 
-	//changes all turn signals to false.
+	/// <summary>
+	/// Cancels all rotations.
+	/// </summary>
 	void CancelTurns () {
 		do_F  = false;
 		do_Fi = false;
