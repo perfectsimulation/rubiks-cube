@@ -1,31 +1,65 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// This class contains methods to control the camera according to the user inputs. In addition, it
+/// changes the camera transform according to the tutorial.
+/// </summary>
+/// 
+/// <remarks>
+/// This script is incomplete. The method SetView needs to be updated to control the camera behavior for
+/// the later phases of the tutorial.
+/// </remarks>
 public class TutorialCamera : MonoBehaviour {
 
-	public GameObject solver;
-	private int faceConfig;
-
+	// The GameObject variable |rubiksCube| is the entire Rubik's Cube.
 	public GameObject rubiksCube;
+
+	// The GameObject variable |solver| contains the script to solve the Rubik's Cube.
+	public GameObject solver;
+
+	// The float variable |speed| is the speed with which the camera view moves upon the user inputs.
 	public float speed = 1f;
 
+	// The int variable |faceConfig| represents the current F side according to the camera's transform.
+	private int faceConfig;
+
+	// The int variable |tutorialStep| represents which step of the tutorial is currently active.
 	private int tutorialStep;
+
+	// The float variable |distance| is how far away the camera is from the |rubiksCube|.
 	private float distance;
+
+	// The following float variables |x| and |y| are the x and y coordinates of the camera's transform.
 	private float x = 25;
 	private float y = 45;
 
+	// The bool variable |stepDone| is true when the user has changed the tutorial step and the associated
+	// methods of the new step have been completed one time.
 	private bool stepDone;
 
+	/// <summary>
+	/// Start this instance by assigning a value to |distance|. The current tutorial step is retrieved
+	/// from the Tutorial script attached to |rubiksCube|.
+	/// </summary>
 	void Start () {
 		distance = transform.position.magnitude;
 		tutorialStep = rubiksCube.GetComponent<Tutorial> ().GetTutorialStep ();
 	}
 
+	/// <summary>
+	/// Update this instance by checking if the user has moved to a different step in the tutorial.
+	/// Sets the camera transform according to the current step of the tutorial.
+	/// </summary>
 	void Update () {
 		ChangeStep ();
 		StartCoroutine (SetView (tutorialStep));
 	}
 
+	/// <summary>
+	/// Checks if the user has changed the current step. If the step has changed, the |stepDone| is
+	/// set to false, otherwise |stepDone| is set to true.
+	/// </summary>
 	void ChangeStep () {
 		int newStep = rubiksCube.GetComponent<Tutorial> ().GetTutorialStep ();
 		if (!newStep.Equals (tutorialStep)) {
@@ -36,6 +70,17 @@ public class TutorialCamera : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Sets the camera transform according to the user inputs, as well as the current step of the
+	/// tutorial.
+	/// </summary>
+	/// 
+	/// <remarks>
+	/// This method uses a switch case to determine the behavior of the camera for a given step of
+	/// the tutorial. Depending on the step, the F side may change to a different color. This is
+	/// necessary to ensure the methods used in the Tutorial script execute correctly.
+	/// </remarks>
+	/// <param name="tutorialStep">The current tutorial step.</param>
 	IEnumerator SetView (int tutorialStep) {
 		Quaternion q = Quaternion.Euler (x, y, 0);
 		Vector3 direction = q * Vector3.forward;
@@ -452,12 +497,15 @@ public class TutorialCamera : MonoBehaviour {
 		}
 	}
 
-
+	// The following lines of code are a template and used in each tutorial step to enable the user
+	// to change the view of the Rubik's Cube.
 //		q = Quaternion.Euler (x, y, 0);
 //		direction = q * Vector3.forward;
 //		transform.position = rubiksCube.transform.position - distance * direction;
 
-
+	/// <summary>
+	/// Spins the Rubik's Cube. This method doesn't work as it is.
+	/// </summary>
 	IEnumerator SpinCube () {
 		Vector3 r = new Vector3 (0, 1, 0);
 		rubiksCube.transform.RotateAround (rubiksCube.transform.position, r, 30f * Time.deltaTime);
@@ -466,7 +514,23 @@ public class TutorialCamera : MonoBehaviour {
 		
 
 
-
+	/// <summary>
+	/// Gets the face config associated with the current camera transform.
+	/// </summary>
+	/// 
+	/// <remarks>
+	/// When the int return variable is...
+	/// 0: F = Blue, U = White
+	/// 1: F = Blue, U = Yellow
+	/// 2: F = Purple, U = White
+	/// 3: F = Red, U = Yellow
+	/// 4: F = Green, U = White
+	/// 5: F = Green, U = Yellow
+	/// 6: F = Red, U = White
+	/// 7: F = Purple, U = Yellow
+	/// </remarks>
+	/// 
+	/// <returns>The face config.</returns>
 	public int GetFaceConfig () {
 		int sunnySideUp = rubiksCube.GetComponent<Tutorial> ().GetUpFace ();
 		float y = this.transform.rotation.eulerAngles.y;
