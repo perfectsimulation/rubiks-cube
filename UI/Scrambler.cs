@@ -2,6 +2,9 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+/// <summary>
+/// This class contains the methods used to obtain a random configuration of the Rubik's Cube.
+/// </summary>
 public class Scrambler : MonoBehaviour {
 
 	#region Properties
