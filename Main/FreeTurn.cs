@@ -1,16 +1,26 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
 public class FreeTurn : MonoBehaviour {
 	
 	#region Properties
+
+	// The GameObject variable |solver| contains the script to scramble and solve the Rubik's Cube.
 	public GameObject solver;
+
+	// The int variable |sunnySideUp| is used as a reference to the current side of the Rubik's Cube that
+	// is facing up. Its value will either be 1 for the White side up, and -1 for the Yellow side up.
 	private int sunnySideUp;
 
 	public Camera cam;
+
+	// The int variable |faceConfig| represents the current F side of the Rubik's Cube according to
+	// the camera view.
 	private int faceConfig;
 
+	// The following GameObject variables are moving displays to show the next rotation the user should
+	// perform.
 	public GameObject guide_Fcw;
 	public GameObject guide_Fccw;
 	public GameObject guide_Dcw;
@@ -24,6 +34,8 @@ public class FreeTurn : MonoBehaviour {
 	public GameObject guide_Bcw;
 	public GameObject guide_Bccw;
 
+	// The following bool variables are used with GetButtonDown methods to determine which rotation
+	// the user inputted.
 	private bool invert;
 	private bool press_F;
 	private bool press_D;
@@ -32,6 +44,7 @@ public class FreeTurn : MonoBehaviour {
 	private bool press_L;
 	private bool press_B;
 
+	// The following bool variables are used to signal that a rotation should be made.
 	private bool do_F  = false;
 	private bool do_Fi = false;
 	private bool do_D  = false;
@@ -45,6 +58,7 @@ public class FreeTurn : MonoBehaviour {
 	private bool do_B  = false;
 	private bool do_Bi = false;
 
+	// The following int variables represent the rotations of the Rubik's Cube.
 	private int f;
 	private int fi;
 	private int d;
@@ -59,6 +73,10 @@ public class FreeTurn : MonoBehaviour {
 	private int bi;
 	#endregion
 
+	/// <summary>
+	/// Update this instance by checking for pressed buttons and reconfiguring the rotation int variables
+	/// when the camera view changes.
+	/// </summary>
 	void Update () {
 		sunnySideUp = solver.GetComponent<Solver> ().GetUpFace ();
 		faceConfig = cam.GetComponent<CameraController> ().GetFaceConfig ();
@@ -73,7 +91,7 @@ public class FreeTurn : MonoBehaviour {
 		press_B  = Input.GetButtonDown ("B");
 		#endregion
 
-		// only one turn occurs if multiple buttons are pressed simultaneously
+		// Only one turn occurs if multiple buttons are pressed simultaneously
 		#region ifButtonPressed
 		if (press_F) {
 			if (invert) {
@@ -146,7 +164,10 @@ public class FreeTurn : MonoBehaviour {
 		}
 		#endregion
 	}
-
+		
+	/// <summary>
+	/// Performs a rotation of the Rubik's Cube.
+	/// </summary>
 	IEnumerator Turn () {
 		while (solver.GetComponent<Solver> ().IsTurning ()) {
 			CancelTurns ();
@@ -156,12 +177,10 @@ public class FreeTurn : MonoBehaviour {
 			CancelTurns ();
 			yield return null;
 		}
-
-
+			
 		PressManager ();
 		int faceConfig = cam.GetComponent<CameraController> ().GetFaceConfig ();
 		ConfigureMoves (faceConfig);
-
 
 		if (do_F) {
 			List<int> turn = new List<int> ();
@@ -238,6 +257,10 @@ public class FreeTurn : MonoBehaviour {
 
 	}
 
+	/// <summary>
+	/// Configures the rotation int variables according to the camera view.
+	/// </summary>
+	/// <param name="faceConfig">Face config.</param>
 	void ConfigureMoves (int faceConfig) {
 		switch (faceConfig) {
 		case 0:
@@ -355,6 +378,9 @@ public class FreeTurn : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Turns the Guide GameObjects.
+	/// </summary>
 	void GuideOff () {
 		guide_Fcw.SetActive (false);
 		guide_Fccw.SetActive (false);
@@ -370,8 +396,9 @@ public class FreeTurn : MonoBehaviour {
 		guide_Bccw.SetActive (false);
 	}
 
-	// changes all turn signals to false if more than one are true.
-	// this prevents errors from the user pressing buttons too fast, or at the same time.
+	/// <summary>
+	/// Manages button presses by the user to negate simultaneous button presses.
+	/// </summary>
 	void PressManager () {
 
 		int a = do_F ? 1 : 0;
@@ -404,7 +431,9 @@ public class FreeTurn : MonoBehaviour {
 		}
 	}
 
-	//changes all turn signals to false.
+	/// <summary>
+	/// Cancels all rotations.
+	/// </summary>
 	void CancelTurns () {
 		do_F  = false;
 		do_Fi = false;
