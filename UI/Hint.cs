@@ -1,26 +1,57 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
+/// <summary>
+/// This class contains all the methods used to show/hide animations of the next rotation the user
+/// should make to solve the Rubik's Cube.
+/// </summary>
+/// 
+/// <remarks>
+/// This script is incomplete. It does not work if the user has flipped the Rubik's Cube to view the
+/// Yellow side up. To fix this script, the transforms of the guide GameObjects must be changed with each
+/// flip of the Rubik's Cube.
+/// <remarks>
 public class Hint : MonoBehaviour {
 
 	#region Properties
+
+	// The Button variable |hint| is the Button this MonoBehavior is attached to.
 	public Button hint;
+
+	// The bool variable |hide| is true when all hint animations are hidden.
 	private bool hide = true;
 
+	// The GameObject variable |solver| contains the script to solve the Rubik's Cube.
+	// The bool variable |solving| indicates whether or not this class is actively performing a solution.
+	// The int variable |sunnySideUp| is used as a reference to the current side of the Rubik's Cube that
+	// is facing up. Its value will either be 1 for the White side up, and -1 for the Yellow side up.
 	public GameObject solver;
 	private bool solving;
 	private int sunnySideUp;
 
 	public Camera cam;
+
+	// The int variable |faceConfig| represents the current F side of the Rubik's Cube according to
+	// the camera view.
 	private int faceConfig;
 
+	// The bool variable |stepDone| is true when the user has completed an algorithm and successfully
+	// completed one step of the solution.
 	private bool stepDone = false;
+
+	// The bool variable |userTurn| is true when the user presses a button to rotate the Rubik's Cube.
 	private bool userTurn = false;
+
+	// The bool variable |wrongTurn| is true when the user makes any rotation other than the correct one,
+	// as given by the algorithm obtained from |solver|.
 	private bool wrongTurn = false;
+
+	// The bool variable |solved| is true when the Rubik's Cube is completely solved.
 	private bool solved = false;
 
+	// The following GameObject variables beginning with "guide" are the "animations" for each hint rotation.
 	public GameObject guide_Fcw;
 	public GameObject guide_Fccw;
 	public GameObject guide_Dcw;
@@ -34,6 +65,8 @@ public class Hint : MonoBehaviour {
 	public GameObject guide_Bcw;
 	public GameObject guide_Bccw;
 
+	// The following bool variables are used with GetButtonDown methods to determine which rotation
+	// the user inputted.
 	private bool invert;
 	private bool press_F;
 	private bool press_D;
@@ -42,6 +75,7 @@ public class Hint : MonoBehaviour {
 	private bool press_L;
 	private bool press_B;
 
+	// The following bool variables are used to signal that a rotation should be made.
 	private bool do_F  = false;
 	private bool do_Fi = false;
 	private bool do_D  = false;
@@ -55,6 +89,7 @@ public class Hint : MonoBehaviour {
 	private bool do_B  = false;
 	private bool do_Bi = false;
 
+	// The following int variables represent the rotations of the Rubik's Cube.
 	private int f;
 	private int fi;
 	private int d;
@@ -68,11 +103,15 @@ public class Hint : MonoBehaviour {
 	private int b;
 	private int bi;
 
-
+	// The List<int> variable |progress| tracks the rotations the user has made. It is used to
+	// compare the user's inputted rotations with the algorithm obtained from |solver|.
 	private List<int> progress = new List<int> ();
 
 	#endregion
 
+	/// <summary>
+	/// Start this instance by adding all rotation signal bool variables to a List<bool> variable.
+	/// </summary>
 	void Start () {
 //		do_All.Add (do_F);
 //		do_All.Add (do_Fi);
@@ -88,6 +127,11 @@ public class Hint : MonoBehaviour {
 //		do_All.Add (do_Bi);
 	}
 
+	/// <summary>
+	/// Update this instance by checking which side of the Rubik's Cube is facing up, updating the rotation
+	/// int variables to reflect the current F side selection, and checking if the user has made any button
+	/// presses to rotate the Rubik's Cube.
+	/// </summary>
 	void Update () {
 		sunnySideUp = solver.GetComponent<Solver> ().GetUpFace ();
 		faceConfig = cam.GetComponent<CameraController> ().GetFaceConfig ();
@@ -173,11 +217,17 @@ public class Hint : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Hides the hint animations.
+	/// </summary>
 	void HideHint () {
 		StopAllCoroutines ();
 		GuideOff ();
 	}
 
+	/// <summary>
+	/// Turns off all guide animations.
+	/// </summary>
 	void GuideOff () {
 		guide_Fcw.SetActive (false);
 		guide_Fccw.SetActive (false);
@@ -193,24 +243,33 @@ public class Hint : MonoBehaviour {
 		guide_Bccw.SetActive (false);
 	}
 
+	/// <summary>
+	/// Shows the hint animations.
+	/// </summary>
 	void ShowHint () {
 		stepDone = false;
 		userTurn = false;
 		wrongTurn = false;
 		solved = false;
+		// No hint animations will show if there is an active solution proceeding.
 		solving = solver.GetComponent<Solver> ().IsSolving ();
 		if (!solving) {
 			StartCoroutine (Guide ());
 		}
 	}
 
+	/// <summary>
+	/// Shows hint animations until the Rubik's Cube is fully solved.
+	/// </summary>
 	IEnumerator Guide () {
 		while (!solved) {
 			GuideOff ();
 			stepDone = false;
+			// Obtain the algorithm for this current step.
 			List<int> algorithm = solver.GetComponent<Solver> ().GetAlgorithm ();
 			StartCoroutine (GuideSteps (algorithm));
 			while (!stepDone) {
+				// If the user makes an incorrect rotation, the hint animations are disabled.
 				if (wrongTurn) {
 					print ("wrong");
 					wrongTurn = false;
@@ -221,9 +280,14 @@ public class Hint : MonoBehaviour {
 				yield return null;
 			}
 		}
-		ShowOrHide ();	// turn off hint once the cube has been solved
+		// Turns off the hint animations when the Rubik's Cube has been fully solved.
+		ShowOrHide ();
 	}
 
+	/// <summary>
+	/// Shows the hint animations for each step of the current algorithm.
+	/// </summary>
+	/// <param name="algorithm">Algorithm.</param>
 	IEnumerator GuideSteps (List<int> algorithm) {
 		foreach (int move in algorithm) {
 			switch (move) {
@@ -335,12 +399,19 @@ public class Hint : MonoBehaviour {
 			}
 		}
 
+		// When |progress| matches |algorithm|, this section of code is reached.
 		stepDone = true;
 		progress.Clear ();
 		yield return null;
 	}
 		
+	/// <summary>
+	/// Checks the progress of the user by matching each rotation in |progress| with |algorithm|.
+	/// </summary>
+	/// <param name="algorithm">Algorithm.</param>
 	void CheckProgress (List<int> algorithm) {
+		// If |progress| is shorter than algorithm and the current step is not finished, only compare
+		// the number of rotations the user has made to |algorithm|.
 		int len = progress.Count;
 		for (int k = 0; k < len; k++) {
 			if (progress [k] != algorithm [k]) {
@@ -351,6 +422,10 @@ public class Hint : MonoBehaviour {
 	}
 
 	#region Guide Ons
+
+	/// <summary>
+	/// Turns on the guide for the White clockwise animation.
+	/// </summary>
 	IEnumerator GuideOn__Fcw () {
 		GuideOff ();
 		guide_Fcw.SetActive (true);
@@ -366,6 +441,9 @@ public class Hint : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Turns on the guide for the White counterclockwise animation.
+	/// </summary>
 	IEnumerator GuideOn_Fccw () {
 		GuideOff ();
 		guide_Fccw.SetActive (true);
@@ -381,6 +459,9 @@ public class Hint : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Turns on the guide for the Green clockwise animation.
+	/// </summary>
 	IEnumerator GuideOn__Dcw () {
 		GuideOff ();
 		guide_Dcw.SetActive (true);
@@ -396,6 +477,9 @@ public class Hint : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Turns on the guide for the Green counterclockwise animation.
+	/// </summary>
 	IEnumerator GuideOn_Dccw () {
 		GuideOff ();
 		guide_Dccw.SetActive (true);
@@ -411,6 +495,9 @@ public class Hint : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Turns on the guide for the Red clockwise animation.
+	/// </summary>
 	IEnumerator GuideOn__Rcw () {
 		GuideOff ();
 		guide_Rcw.SetActive (true);
@@ -426,6 +513,9 @@ public class Hint : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Turns on the guide for the Red counterclockwise animation.
+	/// </summary>
 	IEnumerator GuideOn_Rccw () {
 		GuideOff ();
 		guide_Rccw.SetActive (true);
@@ -441,6 +531,9 @@ public class Hint : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Turns on the guide for the Blue clockwise animation.
+	/// </summary>
 	IEnumerator GuideOn__Ucw () {
 		GuideOff ();
 		guide_Ucw.SetActive (true);
@@ -456,6 +549,9 @@ public class Hint : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Turns on the guide for the Blue counterclockwise animation.
+	/// </summary>
 	IEnumerator GuideOn_Uccw () {
 		GuideOff ();
 		guide_Uccw.SetActive (true);
@@ -471,6 +567,9 @@ public class Hint : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Turns on the guide for the Purple clockwise animation.
+	/// </summary>
 	IEnumerator GuideOn__Lcw () {
 		GuideOff ();
 		guide_Lcw.SetActive (true);
@@ -486,6 +585,9 @@ public class Hint : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Turns on the guide for the Purple counterclockwise animation.
+	/// </summary>
 	IEnumerator GuideOn_Lccw () {
 		GuideOff ();
 		guide_Lccw.SetActive (true);
@@ -501,6 +603,9 @@ public class Hint : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Turns on the guide for the Yellow clockwise animation.
+	/// </summary>
 	IEnumerator GuideOn__Bcw () {
 		GuideOff ();
 		guide_Bcw.SetActive (true);
@@ -516,6 +621,9 @@ public class Hint : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Turns on the guide for the Yellow counterclockwise animation.
+	/// </summary>
 	IEnumerator GuideOn_Bccw () {
 		GuideOff ();
 		guide_Bccw.SetActive (true);
@@ -532,6 +640,11 @@ public class Hint : MonoBehaviour {
 	}
 	#endregion
 
+	/// <summary>
+	/// Configures the rotation int variables to the current selection of the F side, determined by the
+	/// camera view.
+	/// </summary>
+	/// <param name="faceConfig">Face config.</param>
 	void ConfigureMoves (int faceConfig) {
 		switch (faceConfig) {
 		case 0:
@@ -649,6 +762,12 @@ public class Hint : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Waits for the user to apply a rotation to the Rubik's Cube. Once a rotation has been made,
+	/// adds the associated rotation int variable to |progress|.
+	/// </summary>
+	/// <returns>The for turn.</returns>
+	/// <param name="turnString">Turn string.</param>
 	IEnumerator WaitForTurn (string turnString) {
 		// Waits for the user to apply a free turn.
 		// Checks if the turn was correct.
@@ -802,6 +921,10 @@ public class Hint : MonoBehaviour {
 		yield return null;
 	}
 
+	/// <summary>
+	/// Checks if the user has pressed a button.
+	/// </summary>
+	/// <returns><c>true</c>, if a button was pressed, <c>false</c> otherwise.</returns>
 	bool ButtonPressed () {
 		solving = solver.GetComponent<Solver> ().IsSolving ();
 		if (solving) {
@@ -812,6 +935,10 @@ public class Hint : MonoBehaviour {
 		|| press_L || press_B);
 	}
 
+	/// <summary>
+	/// Returns which rotation the user inputted.
+	/// </summary>
+	/// <returns>The inputted rotation.</returns>
 	int WhichTurnDone () {
 		if (do_F) {
 			return f;
@@ -863,8 +990,10 @@ public class Hint : MonoBehaviour {
 		return 12;
 	}
 
-	// changes all turn signals to false if more than one are true.
-	// this prevents errors from the user pressing buttons too fast, or at the same time.
+	/// <summary>
+	/// Changes all rotation signals to false if more than one are true. This prevents errors from
+	/// attempting to perform multiple rotations simultaneously.
+	/// </summary>
 	void PressManager () {
 
 		int a = do_F ? 1 : 0;
@@ -897,7 +1026,9 @@ public class Hint : MonoBehaviour {
 		}
 	}
 
-	//changes all turn signals to false.
+	/// <summary>
+	/// Changes all rotation signals to false.
+	/// </summary>
 	void CancelTurns () {
 		do_F  = false;
 		do_Fi = false;
@@ -921,10 +1052,18 @@ public class Hint : MonoBehaviour {
 
 	}
 
+	/// <summary>
+	/// Determines whether this instance is hinting.
+	/// </summary>
+	/// <returns><c>true</c> if this instance is hinting; otherwise, <c>false</c>.</returns>
 	public bool IsHinting () {
 		return (!hide);
 	}
 
+	/// <summary>
+	/// Determines whether this instance is in the middle of a step.
+	/// </summary>
+	/// <returns><c>true</c> if this instance is in the middle of a step; otherwise, <c>false</c>.</returns>
 	public bool IsStepping () {
 		return stepDone;
 	}
