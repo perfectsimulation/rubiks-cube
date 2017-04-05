@@ -1029,6 +1029,42 @@ public class TutorialScrambler : MonoBehaviour {
 	}
 
 	public void Tutor_YellowCorners5 () {
+		Tutor_YellowCorners4 ();
+		StartCoroutine (L__cw ());
+		StartCoroutine (B_ccw ());
+		StartCoroutine (L_ccw ());
+		StartCoroutine (B_ccw ());
+		StartCoroutine (L__cw ());
+		StartCoroutine (B_ccw ());
+		StartCoroutine (B_ccw ());
+		StartCoroutine (L_ccw ());
+	}
+
+	public void Tutor_YellowCorners6 () {
+		Tutor_YellowCorners5 ();
+		StartCoroutine (U__cw ());
+		StartCoroutine (B_ccw ());
+		StartCoroutine (U_ccw ());
+		StartCoroutine (B_ccw ());
+		StartCoroutine (U__cw ());
+		StartCoroutine (B_ccw ());
+		StartCoroutine (B_ccw ());
+		StartCoroutine (U_ccw ());
+	}
+
+	public void Tutor_YellowCorners7 () {
+		Tutor_YellowCorners6 ();
+		StartCoroutine (D__cw ());
+		StartCoroutine (B_ccw ());
+		StartCoroutine (D_ccw ());
+		StartCoroutine (B_ccw ());
+		StartCoroutine (D__cw ());
+		StartCoroutine (B_ccw ());
+		StartCoroutine (B_ccw ());
+		StartCoroutine (D_ccw ());
+	}
+		
+	public void Tutor_YellowCorners8 () {
 		Tutor_YellowCorners2 ();
 		StartCoroutine (L__cw ());
 		StartCoroutine (U__cw ());
@@ -1057,8 +1093,119 @@ public class TutorialScrambler : MonoBehaviour {
 		StartCoroutine (L_ccw ());
 		StartCoroutine (B__cw ());
 		StartCoroutine (D_ccw ());
+	}
+
+	public void Tutor_YellowCorners9 () {
+		Tutor_YellowCorners8 ();
+		StartCoroutine (D__cw ());
+		StartCoroutine (B_ccw ());
+		StartCoroutine (D_ccw ());
+		StartCoroutine (B_ccw ());
+		StartCoroutine (D__cw ());
+		StartCoroutine (B_ccw ());
+		StartCoroutine (B_ccw ());
+		StartCoroutine (D_ccw ());
+	}
+
+	public void Tutor_YellowCorners10 () {
+		Tutor_YellowCorners9 ();
+		StartCoroutine (D__cw ());
+		StartCoroutine (B_ccw ());
+		StartCoroutine (D_ccw ());
+		StartCoroutine (B_ccw ());
+		StartCoroutine (D__cw ());
+		StartCoroutine (B_ccw ());
+		StartCoroutine (B_ccw ());
+		StartCoroutine (D_ccw ());
+	}
+
+	public void Tutor_YellowCorners11 () {
+		Tutor_YellowCorners10 ();
+		StartCoroutine (U__cw ());
+		StartCoroutine (B_ccw ());
+		StartCoroutine (U_ccw ());
+		StartCoroutine (B_ccw ());
+		StartCoroutine (U__cw ());
+		StartCoroutine (B_ccw ());
+		StartCoroutine (B_ccw ());
+		StartCoroutine (U_ccw ());
+	}
+
+
+	public void Tutor_TopLayer1 () {
+		Tutor_YellowCorners11 ();
+		StartCoroutine (B_ccw ());
+		StartCoroutine (B_ccw ());
+	}
+
+	public void Tutor_TopLayer2 () {
+		Tutor_YellowCorners11 ();
+		StartCoroutine (R_ccw ());
+		StartCoroutine (U__cw ());
+		StartCoroutine (R_ccw ());
+		StartCoroutine (D__cw ());
+		StartCoroutine (D__cw ());
+		StartCoroutine (R__cw ());
+		StartCoroutine (U_ccw ());
+		StartCoroutine (R_ccw ());
+		StartCoroutine (D__cw ());
+		StartCoroutine (D__cw ());
+		StartCoroutine (R__cw ());
+		StartCoroutine (R__cw ());
+	}
+
+	public void Tutor_TopLayer3 () {
+		Tutor_TopLayer2 ();
+		StartCoroutine (B_ccw ());
+	}
+
+	public void Tutor_TopLayer4 () {
+		Tutor_TopLayer3 ();
+		StartCoroutine (R_ccw ());
+		StartCoroutine (U__cw ());
+		StartCoroutine (R_ccw ());
+		StartCoroutine (D__cw ());
+		StartCoroutine (D__cw ());
+		StartCoroutine (R__cw ());
+		StartCoroutine (U_ccw ());
+		StartCoroutine (R_ccw ());
+		StartCoroutine (D__cw ());
+		StartCoroutine (D__cw ());
+		StartCoroutine (R__cw ());
+		StartCoroutine (R__cw ());
+		StartCoroutine (B_ccw ());
+	} 
+
+	public void Tutor_TopLayer5 () {
+		Tutor_TopLayer4 ();
+		StartCoroutine (B__cw ());
+	}
+
+	public void Tutor_TopLayer6 () {
+		Tutor_TopLayer5 ();
+		StartCoroutine (U_ccw ());
+		StartCoroutine (L__cw ());
+		StartCoroutine (U_ccw ());
+		StartCoroutine (R__cw ());
+		StartCoroutine (R__cw ());
+		StartCoroutine (U__cw ());
+		StartCoroutine (L_ccw ());
+		StartCoroutine (U_ccw ());
+		StartCoroutine (R__cw ());
+		StartCoroutine (R__cw ());
+		StartCoroutine (U__cw ());
+		StartCoroutine (U__cw ());
+		StartCoroutine (B_ccw ());
+	}
+
+	public void Tutor_TopLayer7 () {
+		Tutor_YellowCorners11 ();
 
 	}
+
+
+
+
 
 	#endregion
 }
