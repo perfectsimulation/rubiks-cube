@@ -1004,6 +1004,210 @@ public class Tutorial : MonoBehaviour {
 			return "Now the Blue-Purple Edge is on the U side.";
 		case 126:
 			return "Summary of Phase 3:";
+		case 127:
+			return "Phase 4: Yellow Cross";
+		case 128:
+			return "This phase and the ones after it are different than the previous phases.";
+		case 129:
+			return "There are four Edge pieces that make up the Yellow Cross.";
+		case 130:
+			return "Unlike the White Cross Edges, the Yellow Cross Edge pieces do not have to match both of their adjacent Center pieces. They only have to match the Yellow Center piece.";
+		case 131:
+			return "Instead of solving this phase one piece at a time, we will perform algorithms based on the configuration of all the pieces.";
+		case 132:
+			return "These are the three configurations we need to watch out for. Keep in mind these configurations only show the Yellow Cross Edges. There may be Yellow Corners on the Yellow side as well, but we won't worry about those yet.";
+		case 133:
+			return "Let's look at an example of the top configuration.";
+		case 134:
+			return "For this pattern, we can pick any side to be the F side. Let's go with the Blue side.";
+		case 135:
+			return "Perform the algorithm [F U R U' R' F'].";
+		case 136:
+			return "Now the current pattern looks very similar to the third configuration.";
+		case 137:
+			return "It is important that the line of Yellow pieces is horizontal. If it's vertical with respect to our F side, we have two options: change the F side OR rotate the U side.";
+		case 138:
+			return "Let's change the F side to the Purple side. Now we have exactly the third configuration.";
+		case 139:
+			return "Perfrom the algorithm [F R U R' U' F'].";
+		case 140:
+			return "Now we have the Yellow Cross.";
+		case 141:
+			return "Let's look at another example.";
+		case 142:
+			return "Here we have a pattern that looks very similar to the second configuration.";
+		case 143:
+			return "Like the third configuration, it is important that we match this pattern exactly to the configuration shown.";
+		case 144:
+			return "We can either change the F side OR rotate the U side.";
+		case 145:
+			return "Let's rotate the U side so we have the correct configuration using Blue as the F side.";
+		case 146:
+			return "Now we have the second configuration exactly.";
+		case 147:
+			return "This pattern calls for the same algorithm as the first configuration.";
+		case 148:
+			return "Perform the algorithm [F U R U' R' F'].";
+		case 149:
+			return "Now we have the Yellow Cross.";
+		case 150:
+			return "Phase 4 Summary";
+		
+
+		case 151:
+			return "Phase 5: Yellow Corners";
+		case 152:
+			return "There are four Corner pieces that make up the Yellow Corners.";
+		case 153:
+			return "Unlike the White Corners, the Yellow Corner pieces do not have to match all of their adjacent side colors. They only have to match the Yellow side.";
+		case 154:
+			return "There is only one algorithm for this phase. The important part is making sure the pattern on the Yellow side has exactly the same orientation as any one of these three configurations.";
+		case 155:
+			return "The first configuration is used when there are NO Yellow Corners with Yellow on the U side.";
+		case 156:
+			return "Let's look at an example.";
+		case 157:
+			return "Change the F side until we get an exact match of the first configuration.";
+		case 158:
+			return "There is only one possible choice for an F side that will give us the correct orientation: the Red side.";
+		case 159:
+			return "With Red as F, we have a Yellow Corner with its Yellow color facing the left.";
+		case 160:
+			return "Perform the algorithm [R U R' U R U U R'].";
+		case 161:
+			return "Now we have something that almost looks like the second configuration. We have exactly one Yellow Corner with its Yellow color on the U side.";
+		case 162:
+			return "We must orient the Rubik's Cube so that it matches the second configuration exactly. We can do this by changing our F side to Green.";
+		case 163:
+			return "Now we have exactly the second configuration. The second configuration applies when there is exactly ONE Yellow Corner with Yellow on the U side.";
+		case 164:
+			return "Perform the algorithm [R U R' U R U U R'].";
+		case 165:
+			return "Now we have all of the Yellow Corners on the U side.";
+		case 166:
+			return "Before moving on, we must review something important about the third configuration.";
+		case 167:
+			return "Even though the bottom configuration shown appears only to have five Yellow pieces on the U side, there must be at least TWO Yellow Corners with their Yellow color on the U side for this configuration to apply.";
+		case 168:
+			return "These are not shown in the bottom configuration because ANY two of the four Yellow Corners can have their Yellow color on the U side.";
+		case 169:
+			return "If there are three Yellow Corners with their Yellow Corners on the U side, this configuration should be used.";
+		case 170:
+			return "Let's look at an example.";
+		case 171:
+			return "We need to find the correct F side to match the bottom configuration. There should be a Yellow Corner with its Yellow color on the F side.";
+		case 172:
+			return "The Green side is the correct F side here.";
+		case 173:
+			return "Perform the algorithm [R U R' U R U U R'].";
+		case 174:
+			return "We are back to the same pattern as the middle configuration.";
+		case 175:
+			return "Let's find the correct F side to match the middle configuration.";
+		case 176:
+			return "The Red side is the correct F side here.";
+		case 177:
+			return "Perform the algorithm [R U R' U R U U R'].";
+		case 178:
+			return "Once again we have the same pattern as the middle configuration. Let's repeat the last step we did.";
+		case 179:
+			return "The Purple side is the correct F side here.";
+		case 180:
+			return "Perform the algorithm [R U R' U R U U R'].";
+		case 181:
+			return "Now we have all of the Yellow Corners on the U side.";
+		case 182:
+			return "Let's look at one more example using the bottom configuration.";
+		case 183:
+			return "Let's find the correct F side to match the bottom configuration.";
+		case 184:
+			return "The Red side is the correct F side here.";
+		case 185:
+			return "Perform the algorithm [R U R' U R U U R'].";
+		case 186:
+			return "Now we have the middle configuration, and we have the correct F side already: the Red side.";
+		case 187:
+			return "Perform the algorithm [R U R' U R U U R'].";
+		case 188:
+			return "We got the middle configuration again. Let's move to the correct F side, which is the Purple side.";
+		case 189:
+			return "Perform the algorithm [R U R' U R U U R'].";
+		case 190:
+			return "Now we have all of the Yellow Corners on the U side.";
+		case 191:
+			return "Phase 5 Summary";
+		case 192:
+			return "Phase 6: Top Layer";
+		case 193:
+			return "There are four Edge pieces and four Corner pieces that make up the Top Layer. We will start with the Corner pieces.";
+		case 194:
+			return "Take a look at the Yellow Corners of the U side. Rotate the U side until at least TWO Corners are in the right spots, meaning they match their colors on all three of their sides.";
+		case 195:
+			return "The two Top Layer Corners will either be next to each other...";
+		case 196:
+			return "...or across from each other.";
+		case 197:
+			return "The top configuration shown on the right applies when the two correct Top Layer Corners are next to each other. The bottom configuration applies when the Corners are across from each other diagonally.";
+		case 198:
+			return "Let's look at an example of the top configuration.";
+		case 199:
+			return "Here the two correct Top Layer Corners are the Green-Red-Yellow and the Purple-Green-Yellow Corners.";
+		case 200:
+			return "Rotate the U side until these pieces are on the correct side, which is Green in this case. Then we need to choose the correct F side so that the two correct Top Layer Edges are on the B side.";
+		case 201:
+			return "The Blue side is the correct F side here.";
+		case 202:
+			return "Perform the algorithm [R' F R' B B R F' R' B B R R U'].";
+		case 203:
+			return "In this case, we've already solved the Rubik's Cube without having to deal with the Top Layer Edges! Sometimes we won't be so lucky.";
+		case 204:
+			return "Let's look at an example of the bottom configuration. Here the Red-Blue-Yellow and the Purple-Green-Yellow Corners are the two correct Top Layer Corners.";
+		case 205:
+			return "First we need to rotate the U side until the two correct Top Layer Corners are on the right sides. Next we need to perform the same algorithm as before in order to obtain the top configuration.";
+		case 206:
+			return "It does not matter which side we choose as F whenever we have the bottom configuration. Let's go with the Blue side as F.";
+		case 207:
+			return "Perform the algorithm [R' F R' B B R F' R' B B R R U'].";
+		case 208:
+			return "Now we almost have the top configuration. The two correct Top Layer Corners are the Red-Blue-Yellow and the Green-Red-Yellow Corners. They are next to each other, not across from each other.";
+		case 209:
+			return "We need to rotate the U side until the two correct Top Layer Corners are on the correct side.";
+		case 210:
+			return "Let's find the correct F side to apply for the first configuration.";
+		case 211:
+			return "The Purple side is the correct F side here, since the two adjacent correct Top Layer Corners are on the B side.";
+		case 212:
+			return "Perform the algorithm [R' F R' B B R F' R' B B R R U'].";
+		case 213:
+			return "Once again we have solved the Rubik's Cube without having to deal with the Top Layer Edges.";
+		case 214:
+			return "Let's practice for situations where we will have to deal with the Top Layer Edges.";
+		case 215:
+			return "Take a look at the Yellow Edges of the U side. There are two possibilities. Either all the Top Layer Edges will be mismatched, or there will be a single Top Layer Edge in the correct spot.";
+		case 216:
+			return "Here, all the Top Layer Edges are mismatched.";
+		case 217:
+			return "Pick any Top Layer Edge. Let's go with the Purple-Yellow Edge.";
+		case 218:
+			return "Since this Top Layer Edge is on the Blue side, we choose the Blue side to be F.";
+		case 219:
+			return "There are two possible configurations now.";
+		case 220:
+			return "Notice that the Purple side is clockwise to the Bluw side. This matches the top configuration shown on the right.";
+		case 221:
+			return "Perform the algorithm [F F U L R' F F L' R U F F].";
+		case 222:
+			return "Now there is a single Top Layer Edge in the correct spot. We need to set a new F side so that this correct Top Layer Edge is on the B side.";
+		case 223:
+			return "The Red side is the correct F side here.";
+		case 224:
+			return "Take a look at the Top Layer Edge on this side. It is the Blue-Yellow Edge. Since the Blue side is clockwise to the Red side, we need to perform the same algorithm as last time.";
+		case 225:
+			return "Perform the algorithm [F F U L R' F F L' R U F F].";
+		case 226:
+			return "Now all the Top Layer Edges are in the correct spots, and we've solved the Rubik's Cube!";
+		case 227:
+			return "Phase 6 Summary";
 		}
 		return null;
 	}
@@ -2731,7 +2935,7 @@ public class Tutorial : MonoBehaviour {
 			break;
 		#endregion
 
-
+		#region Yellow Cross
 		case 127:
 			if (!stepDone) {
 				stepDone = true;
@@ -2745,8 +2949,8 @@ public class Tutorial : MonoBehaviour {
 			if (!stepDone) {
 				stepDone = true;
 				ResetCube ();
-				ResetColors ();
-				solver.GetComponent<TutorialScrambler> ().Tutor_MiddleLayer8 ();
+				AnyColors ();
+				YellowCross ();
 				StartCoroutine (SwapTopView ());
 			}
 			break;
@@ -2756,7 +2960,6 @@ public class Tutorial : MonoBehaviour {
 				ResetCube ();
 				AnyColors ();
 				YellowCross ();
-				solver.GetComponent<TutorialScrambler> ().Tutor_MiddleLayer8 ();
 				StartCoroutine (SwapTopView ());
 			}
 			break;
@@ -2765,8 +2968,7 @@ public class Tutorial : MonoBehaviour {
 				stepDone = true;
 				ResetCube ();
 				AnyColors ();
-				YellowCorners ();
-				solver.GetComponent<TutorialScrambler> ().Tutor_MiddleLayer8 ();
+				YellowCross ();
 				StartCoroutine (SwapTopView ());
 			}
 			break;
@@ -2776,21 +2978,149 @@ public class Tutorial : MonoBehaviour {
 				ResetCube ();
 				AnyColors ();
 				YellowCross ();
-				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCross1 ();
 				StartCoroutine (SwapTopView ());
 			}
 			break;
 		case 132:
+			//configs
 			if (!stepDone) {
 				stepDone = true;
 				ResetCube ();
 				AnyColors ();
 				YellowCross ();
-				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCross2 ();
 				StartCoroutine (SwapTopView ());
 			}
 			break;
 		case 133:
+			//ml8
+			//configs
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_MiddleLayer8 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 134:
+			//ml8
+			//configs
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCross ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_MiddleLayer8 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 135:
+			//ml8
+			//moves
+			//configs
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCross ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_MiddleLayer8 ();
+				StartCoroutine (SwapTopView ());
+				List<int> moves = new List<int> ();
+				moves.Add (f);
+				moves.Add (u);
+				moves.Add (r);
+				moves.Add (ui);
+				moves.Add (ri);
+				moves.Add (fi);
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
+				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
+					yield return null;
+				}
+			}
+			break;
+		case 136:
+			//yc1
+			//configs
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCross ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCross1 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 137:
+			//yc1
+			//configs
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCross ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCross1 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 138:
+			//yc1
+			//configs
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCross ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCross1 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 139:
+			//yc1
+			//moves
+			//configs
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCross ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCross1 ();
+				StartCoroutine (SwapTopView ());
+				List<int> moves = new List<int> ();
+				moves.Add (f);
+				moves.Add (r);
+				moves.Add (u);
+				moves.Add (ri);
+				moves.Add (ui);
+				moves.Add (fi);
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
+				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
+					yield return null;
+				}
+			}
+			break;
+		case 140:
+			//yc2
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCross2 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 141:
+			//yc3
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCross3 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 142:
+			//yc3
+			//configs
 			if (!stepDone) {
 				stepDone = true;
 				ResetCube ();
@@ -2800,7 +3130,65 @@ public class Tutorial : MonoBehaviour {
 				StartCoroutine (SwapTopView ());
 			}
 			break;
-		case 134:
+		case 143:
+			//yc3
+			//configs
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCross ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCross3 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 144:
+			//yc3
+			//configs
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCross ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCross3 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 145:
+			//yc3
+			//moves
+			//configs
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCross ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCross3 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 146:
+			//yc4
+			//configs
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCross ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCross4 ();
+				StartCoroutine (SwapTopView ());
+				List<int> moves = new List<int> ();
+				moves.Add (u);
+				moves.Add (u);
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
+				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
+					yield return null;
+				}
+			}
+			break;
+		case 147:
+			//yc4
+			//configs
 			if (!stepDone) {
 				stepDone = true;
 				ResetCube ();
@@ -2810,17 +3198,106 @@ public class Tutorial : MonoBehaviour {
 				StartCoroutine (SwapTopView ());
 			}
 			break;
-		case 135:
+		case 148:
+			//yc4
+			//moves
+			//configs
 			if (!stepDone) {
 				stepDone = true;
 				ResetCube ();
 				AnyColors ();
 				YellowCross ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCross4 ();
+				StartCoroutine (SwapTopView ());
+				List<int> moves = new List<int> ();
+				moves.Add (f);
+				moves.Add (u);
+				moves.Add (r);
+				moves.Add (ui);
+				moves.Add (ri);
+				moves.Add (fi);
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
+				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
+					yield return null;
+				}
+			}
+			break;
+		case 149:
+			//yc5
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
 				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCross5 ();
 				StartCoroutine (SwapTopView ());
 			}
 			break;
-		case 136:
+		case 150:
+			//SUMMARY
+			break;
+		#endregion
+
+		case 151:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCorners ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 152:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCorners ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 153:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCorners ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 154:
+			//configs
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCorners ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 155:
+			//configs
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCorners ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 156:
+			//yc1
+			//configs
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners1 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 157:
+			//yc1
+			//configs
 			if (!stepDone) {
 				stepDone = true;
 				ResetCube ();
@@ -2830,7 +3307,59 @@ public class Tutorial : MonoBehaviour {
 				StartCoroutine (SwapTopView ());
 			}
 			break;
-		case 137:
+		case 158:
+			//yc1
+			//configs
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCorners ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners1 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 159:
+			//yc1
+			//configs
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCorners ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners1 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 160:
+			//yc1
+			//moves
+			//configs
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCorners ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners1 ();
+				StartCoroutine (SwapTopView ());
+				List<int> moves = new List<int> ();
+				moves.Add (r);
+				moves.Add (u);
+				moves.Add (ri);
+				moves.Add (u);
+				moves.Add (r);
+				moves.Add (u);
+				moves.Add (u);
+				moves.Add (ri);
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
+				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
+					yield return null;
+				}
+			}
+			break;
+		case 161:
+			//yc2
+			//configs
 			if (!stepDone) {
 				stepDone = true;
 				ResetCube ();
@@ -2840,18 +3369,126 @@ public class Tutorial : MonoBehaviour {
 				StartCoroutine (SwapTopView ());
 			}
 			break;
-		case 138:
+		case 162:
+			//yc2
+			//configs
 			if (!stepDone) {
 				stepDone = true;
 				ResetCube ();
-				ResetColors ();
-//				AnyColors ();
-//				YellowCorners ();
+				AnyColors ();
+				YellowCorners ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners2 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 163:
+			//yc2
+			//configs
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCorners ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners2 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 164:
+			//yc2
+			//moves
+			//configs
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCorners ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners2 ();
+				StartCoroutine (SwapTopView ());
+				List<int> moves = new List<int> ();
+				moves.Add (r);
+				moves.Add (u);
+				moves.Add (ri);
+				moves.Add (u);
+				moves.Add (r);
+				moves.Add (u);
+				moves.Add (u);
+				moves.Add (ri);
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
+				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
+					yield return null;
+				}
+			}
+			break;
+		case 165:
+			//yc3
+			//configs
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCorners ();
 				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners3 ();
 				StartCoroutine (SwapTopView ());
 			}
 			break;
-		case 139:
+		case 166:
+			//yc4
+			//configs
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners4 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 167:
+			//yc4
+			//configs
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners4 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 168:
+			//yc4
+			//configs
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners4 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 169:
+			//yc4
+			//configs
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners4 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 170:
+			//yc4
+			//configs
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners4 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 171:
+			//yc4
+			//configs
 			if (!stepDone) {
 				stepDone = true;
 				ResetCube ();
@@ -2861,7 +3498,47 @@ public class Tutorial : MonoBehaviour {
 				StartCoroutine (SwapTopView ());
 			}
 			break;
-		case 140:
+		case 172:
+			//yc4
+			//configs
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCorners ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners4 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 173:
+			//yc4
+			//moves
+			//configs
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCorners ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners4 ();
+				StartCoroutine (SwapTopView ());
+				List<int> moves = new List<int> ();
+				moves.Add (r);
+				moves.Add (u);
+				moves.Add (ri);
+				moves.Add (u);
+				moves.Add (r);
+				moves.Add (u);
+				moves.Add (u);
+				moves.Add (ri);
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
+				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
+					yield return null;
+				}
+			}
+			break;
+		case 174:
+			//yc5
+			//configs
 			if (!stepDone) {
 				stepDone = true;
 				ResetCube ();
@@ -2871,15 +3548,475 @@ public class Tutorial : MonoBehaviour {
 				StartCoroutine (SwapTopView ());
 			}
 			break;
-		case 141:
+		case 175:
+			//yc5
+			//configs
 			if (!stepDone) {
 				stepDone = true;
 				ResetCube ();
-				ResetColors ();
+				AnyColors ();
+				YellowCorners ();
 				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners5 ();
 				StartCoroutine (SwapTopView ());
 			}
 			break;
+		case 176:
+			//yc5
+			//configs
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCorners ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners5 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 177:
+			//yc5
+			//configs
+			//moves
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCorners ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners5 ();
+				StartCoroutine (SwapTopView ());
+				List<int> moves = new List<int> ();
+				moves.Add (r);
+				moves.Add (u);
+				moves.Add (ri);
+				moves.Add (u);
+				moves.Add (r);
+				moves.Add (u);
+				moves.Add (u);
+				moves.Add (ri);
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
+				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
+					yield return null;
+				}
+			}
+			break;
+		case 178:
+			//yc6
+			//configs
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCorners ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners6 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 179:
+			//yc6
+			//configs
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCorners ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners6 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 180:
+			//yc6
+			//configs
+			//moves
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCorners ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners6 ();
+				StartCoroutine (SwapTopView ());
+				List<int> moves = new List<int> ();
+				moves.Add (r);
+				moves.Add (u);
+				moves.Add (ri);
+				moves.Add (u);
+				moves.Add (r);
+				moves.Add (u);
+				moves.Add (u);
+				moves.Add (ri);
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
+				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
+					yield return null;
+				}
+			}
+			break;
+		case 181:
+			//yc7
+			//configs
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCorners ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners7 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 182:
+			//yc8 new
+			//configs
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCorners ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners8 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 183:
+			//yc8
+			//configs
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCorners ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners8 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 184:
+			//yc8
+			//configs
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCorners ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners8 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 185:
+			//yc8
+			//configs
+			//moves
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCorners ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners8 ();
+				StartCoroutine (SwapTopView ());
+				List<int> moves = new List<int> ();
+				moves.Add (r);
+				moves.Add (u);
+				moves.Add (ri);
+				moves.Add (u);
+				moves.Add (r);
+				moves.Add (u);
+				moves.Add (u);
+				moves.Add (ri);
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
+				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
+					yield return null;
+				}
+			}
+			break;
+		case 186:
+			//yc9
+			//configs
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCorners ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners9 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 187:
+			//yc9
+			//configs
+			//moves
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCorners ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners9 ();
+				StartCoroutine (SwapTopView ());
+				List<int> moves = new List<int> ();
+				moves.Add (r);
+				moves.Add (u);
+				moves.Add (ri);
+				moves.Add (u);
+				moves.Add (r);
+				moves.Add (u);
+				moves.Add (u);
+				moves.Add (ri);
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
+				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
+					yield return null;
+				}
+			}
+			break;
+		case 188:
+			//yc10
+			//configs
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCorners ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners10 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 189:
+			//yc10
+			//configs
+			//moves
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCorners ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners10 ();
+				StartCoroutine (SwapTopView ());
+				List<int> moves = new List<int> ();
+				moves.Add (r);
+				moves.Add (u);
+				moves.Add (ri);
+				moves.Add (u);
+				moves.Add (r);
+				moves.Add (u);
+				moves.Add (u);
+				moves.Add (ri);
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
+				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
+					yield return null;
+				}
+			}
+			break;
+		case 190:
+			//yc11
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				AnyColors ();
+				YellowCorners ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners11 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 191:
+			//summary
+			break;
+		case 192:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners11 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 193:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer1 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 194:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer2 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 195:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer3 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 196:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer4 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 197:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer5 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 198:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer6 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+
+
+
+//		case 128:
+//			if (!stepDone) {
+//				stepDone = true;
+//				ResetCube ();
+//				ResetColors ();
+//				solver.GetComponent<TutorialScrambler> ().Tutor_MiddleLayer8 ();
+//				StartCoroutine (SwapTopView ());
+//			}
+//			break;
+//		case 129:
+//			if (!stepDone) {
+//				stepDone = true;
+//				ResetCube ();
+//				AnyColors ();
+//				YellowCross ();
+//				solver.GetComponent<TutorialScrambler> ().Tutor_MiddleLayer8 ();
+//				StartCoroutine (SwapTopView ());
+//			}
+//			break;
+//		case 130:
+//			if (!stepDone) {
+//				stepDone = true;
+//				ResetCube ();
+//				AnyColors ();
+//				YellowCorners ();
+//				solver.GetComponent<TutorialScrambler> ().Tutor_MiddleLayer8 ();
+//				StartCoroutine (SwapTopView ());
+//			}
+//			break;
+//		case 131:
+//			if (!stepDone) {
+//				stepDone = true;
+//				ResetCube ();
+//				AnyColors ();
+//				YellowCross ();
+//				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCross1 ();
+//				StartCoroutine (SwapTopView ());
+//			}
+//			break;
+//		case 132:
+//			if (!stepDone) {
+//				stepDone = true;
+//				ResetCube ();
+//				AnyColors ();
+//				YellowCross ();
+//				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCross2 ();
+//				StartCoroutine (SwapTopView ());
+//			}
+//			break;
+//		case 133:
+//			if (!stepDone) {
+//				stepDone = true;
+//				ResetCube ();
+//				AnyColors ();
+//				YellowCross ();
+//				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCross3 ();
+//				StartCoroutine (SwapTopView ());
+//			}
+//			break;
+//		case 134:
+//			if (!stepDone) {
+//				stepDone = true;
+//				ResetCube ();
+//				AnyColors ();
+//				YellowCross ();
+//				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCross4 ();
+//				StartCoroutine (SwapTopView ());
+//			}
+//			break;
+//		case 135:
+//			if (!stepDone) {
+//				stepDone = true;
+//				ResetCube ();
+//				AnyColors ();
+//				YellowCross ();
+//				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCross5 ();
+//				StartCoroutine (SwapTopView ());
+//			}
+//			break;
+//		case 136:
+//			if (!stepDone) {
+//				stepDone = true;
+//				ResetCube ();
+//				AnyColors ();
+//				YellowCorners ();
+//				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners1 ();
+//				StartCoroutine (SwapTopView ());
+//			}
+//			break;
+//		case 137:
+//			if (!stepDone) {
+//				stepDone = true;
+//				ResetCube ();
+//				AnyColors ();
+//				YellowCorners ();
+//				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners2 ();
+//				StartCoroutine (SwapTopView ());
+//			}
+//			break;
+//		case 138:
+//			if (!stepDone) {
+//				stepDone = true;
+//				ResetCube ();
+//				ResetColors ();
+//				AnyColors ();
+//				YellowCorners ();
+//				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners3 ();
+//				StartCoroutine (SwapTopView ());
+//			}
+//			break;
+//		case 139:
+//			if (!stepDone) {
+//				stepDone = true;
+//				ResetCube ();
+//				AnyColors ();
+//				YellowCorners ();
+//				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners4 ();
+//				StartCoroutine (SwapTopView ());
+//			}
+//			break;
+//		case 140:
+//			if (!stepDone) {
+//				stepDone = true;
+//				ResetCube ();
+//				AnyColors ();
+//				YellowCorners ();
+//				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners5 ();
+//				StartCoroutine (SwapTopView ());
+//			}
+//			break;
+//		case 141:
+//			if (!stepDone) {
+//				stepDone = true;
+//				ResetCube ();
+//				ResetColors ();
+//				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners5 ();
+//				StartCoroutine (SwapTopView ());
+//			}
+//			break;
 		}
 		yield return null;
 	}
@@ -3405,7 +4542,7 @@ public class Tutorial : MonoBehaviour {
 	/// Skips to a particular phase. Used for debugging.
 	/// </summary>
 	public void SkipToPhaseII () {
-		tutorialStep = 138;
+		tutorialStep = 192;
 	}
 
 	/// <summary>
