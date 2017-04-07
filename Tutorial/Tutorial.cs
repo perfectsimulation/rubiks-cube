@@ -69,7 +69,7 @@ public class Tutorial : MonoBehaviour {
 	public Sprite state2_1a;
 	public Sprite state2_1b;
 	public Sprite state2_1c;
-	public Sprite state2_2;
+	public Sprite state2_2a;
 	public Sprite state2done;
 	public Sprite state3_1a;
 	public Sprite state3_2a;
@@ -446,6 +446,7 @@ public class Tutorial : MonoBehaviour {
 		faceConfig = cam.GetComponent<TutorialCamera> ().GetFaceConfig ();
 		StartCoroutine (FaceSwap ());
 		ConfigureMoves ();
+		ShowSideConfigs ();
 		Summary ();
 		StartCoroutine (Steps ());
 	}
@@ -692,7 +693,7 @@ public class Tutorial : MonoBehaviour {
 			summary3.GetComponent<SpriteRenderer> ().sprite = state2_1c;
 			summary3Text.text = "[R' D' R D]";
 
-			summary4.GetComponent<SpriteRenderer> ().sprite = state2_2;
+			summary4.GetComponent<SpriteRenderer> ().sprite = state2_2a;
 			summary4Text.text = "[R' D' R]";
 
 			break;
@@ -717,6 +718,97 @@ public class Tutorial : MonoBehaviour {
 			summary2.GetComponent<SpriteRenderer> ().sprite = state3_2a;
 			summary2Text.text = "[U' L' U L U F U' F']";
 			break;
+		
+		case 150:
+			foreach (GameObject cube in allCubes) {
+				cube.SetActive (false);
+			}
+			summaryDone.SetActive (true);
+			summaryDoneText.gameObject.SetActive (true);
+
+			summary1.SetActive (true);
+			summary1Text.gameObject.SetActive (true);
+
+			summary2.SetActive (true);
+			summary2Text.gameObject.SetActive (true);
+
+			summary3.SetActive (true);
+			summary3Text.gameObject.SetActive (true);
+
+			summaryDone.GetComponent<SpriteRenderer> ().sprite = state4done;
+
+			summary1.GetComponent<SpriteRenderer> ().sprite = state4_1a;
+			summary1Text.text = "[F U R U' R' F']";
+
+			summary2.GetComponent<SpriteRenderer> ().sprite = state4_2a;
+			summary2Text.text = "[F U R U' R' F']";
+
+			summary3.GetComponent<SpriteRenderer> ().sprite = state4_3a;
+			summary3Text.text = "[F R U R' U' F']";
+			break;
+
+		case 191:
+			foreach (GameObject cube in allCubes) {
+				cube.SetActive (false);
+			}
+			summaryDone.SetActive (true);
+			summaryDoneText.gameObject.SetActive (true);
+
+			summary1.SetActive (true);
+			summary1Text.gameObject.SetActive (true);
+
+			summary2.SetActive (true);
+			summary2Text.gameObject.SetActive (true);
+
+			summary3.SetActive (true);
+			summary3Text.gameObject.SetActive (true);
+
+			summaryDone.GetComponent<SpriteRenderer> ().sprite = state5done;
+
+			summary1.GetComponent<SpriteRenderer> ().sprite = state5_1a;
+			summary1Text.text = "[R U R' U R U U R']";
+
+			summary2.GetComponent<SpriteRenderer> ().sprite = state5_2a;
+			summary2Text.text = "[R U R' U R U U R']";
+
+			summary3.GetComponent<SpriteRenderer> ().sprite = state5_3a;
+			summary3Text.text = "[R U R' U R U U R']";
+			break;
+
+		case 227:
+			foreach (GameObject cube in allCubes) {
+				cube.SetActive (false);
+			}
+			summaryDone.SetActive (true);
+			summaryDoneText.gameObject.SetActive (true);
+
+			summary1.SetActive (true);
+			summary1Text.gameObject.SetActive (true);
+
+			summary2.SetActive (true);
+			summary2Text.gameObject.SetActive (true);
+
+			summary3.SetActive (true);
+			summary3Text.gameObject.SetActive (true);
+
+			summary4.SetActive (true);
+			summary4Text.gameObject.SetActive (true);
+
+			summaryDone.GetComponent<SpriteRenderer> ().sprite = state6done;
+
+			summary1.GetComponent<SpriteRenderer> ().sprite = state6_1a;
+			summary1Text.text = "[R' F R' B B R F' R' B B R R U']";
+
+			summary2.GetComponent<SpriteRenderer> ().sprite = state6_2a;
+			summary2Text.text= "[R' F R' B B R F' R' B B R R U']";
+
+			summary3.GetComponent<SpriteRenderer> ().sprite = state6_3a;
+			summary3Text.text = "[F F U L R' F F L' R U F F]";
+
+			summary4.GetComponent<SpriteRenderer> ().sprite = state6_3b;
+			summary4Text.text = "[F F U' L R' F F L' R U' F F]";
+			break;
+
 		default:
 			if (!cube00.gameObject.activeInHierarchy) {
 				foreach (GameObject cube in allCubes) {
@@ -739,6 +831,105 @@ public class Tutorial : MonoBehaviour {
 			summary4Text.gameObject.SetActive (false);
 			break;
 		}
+	}
+
+	/// <summary>
+	/// Displays/Hides side configurations.
+	/// </summary>
+	void ShowSideConfigs () {
+		int phase = 0;
+
+		// The following if control structure handles all tutorial steps where side configurations should be hidden.
+		if ((tutorialStep < 36) || ((tutorialStep > 52) && (tutorialStep < 63)) || ((tutorialStep > 92) && (tutorialStep < 103))
+			|| ((tutorialStep > 121) && (tutorialStep < 132)) || ((tutorialStep > 148) && (tutorialStep < 154))
+			|| ((tutorialStep > 189) && (tutorialStep < 197)) || (tutorialStep > 225)) {
+			phase = 0;
+		}
+
+		// The following if control structure handles all tutorial steps where side configurations should be shown.
+		if ((tutorialStep >= 36) && (tutorialStep <= 52)) {
+			phase = 1;
+		} else if ((tutorialStep >= 63) && (tutorialStep <= 92)) {
+			phase = 2;
+		} else if ((tutorialStep >= 103) && (tutorialStep <= 121)) {
+			phase = 3;
+		} else if ((tutorialStep >= 132) && (tutorialStep <= 148)) {
+			phase = 4;
+		} else if ((tutorialStep >= 154) && (tutorialStep <= 189)) {
+			phase = 5;
+		} else if ((tutorialStep >= 197) && (tutorialStep <= 225)) {
+			phase = 6;
+		}
+
+		// The following switch statement changes the sprites of the side configurations depending on the phase.
+		switch (phase) {
+		case 0:
+			config1of3.gameObject.SetActive (false);
+			config2of3.gameObject.SetActive (false);
+			config3of3.gameObject.SetActive (false);
+			break;
+		case 1:
+			config1of3.gameObject.SetActive (true);
+			config2of3.gameObject.SetActive (true);
+			config3of3.gameObject.SetActive (false);
+			config1of3.GetComponent<SpriteRenderer> ().sprite = state1_1a;
+			config2of3.GetComponent<SpriteRenderer> ().sprite = state1_1b;
+			break;
+		case 2:
+			if ((tutorialStep == 91) || (tutorialStep == 92)) {
+				config1of3.gameObject.SetActive (true);
+				config2of3.gameObject.SetActive (false);
+				config3of3.gameObject.SetActive (false);
+				config1of3.GetComponent<SpriteRenderer> ().sprite = state2_2a;
+			} else {
+				config1of3.gameObject.SetActive (true);
+				config2of3.gameObject.SetActive (true);
+				config3of3.gameObject.SetActive (true);
+				config1of3.GetComponent<SpriteRenderer> ().sprite = state2_1a;
+				config2of3.GetComponent<SpriteRenderer> ().sprite = state2_1b;
+				config3of3.GetComponent<SpriteRenderer> ().sprite = state2_1c;
+			}
+			break;
+		case 3:
+			config1of3.gameObject.SetActive (true);
+			config2of3.gameObject.SetActive (true);
+			config3of3.gameObject.SetActive (false);
+			config1of3.GetComponent<SpriteRenderer> ().sprite = state3_1a;
+			config2of3.GetComponent<SpriteRenderer> ().sprite = state3_2a;
+			break;
+		case 4:
+			config1of3.gameObject.SetActive (true);
+			config2of3.gameObject.SetActive (true);
+			config3of3.gameObject.SetActive (true);
+			config1of3.GetComponent<SpriteRenderer> ().sprite = state4_1a;
+			config2of3.GetComponent<SpriteRenderer> ().sprite = state4_2a;
+			config3of3.GetComponent<SpriteRenderer> ().sprite = state4_3a;
+			break;
+		case 5:
+			config1of3.gameObject.SetActive (true);
+			config2of3.gameObject.SetActive (true);
+			config3of3.gameObject.SetActive (true);
+			config1of3.GetComponent<SpriteRenderer> ().sprite = state5_1a;
+			config2of3.GetComponent<SpriteRenderer> ().sprite = state5_2a;
+			config3of3.GetComponent<SpriteRenderer> ().sprite = state5_3a;
+			break;
+		case 6:
+			if (tutorialStep < 214) {
+				config1of3.gameObject.SetActive (true);
+				config2of3.gameObject.SetActive (true);
+				config3of3.gameObject.SetActive (false);
+				config1of3.GetComponent<SpriteRenderer> ().sprite = state6_1a;
+				config2of3.GetComponent<SpriteRenderer> ().sprite = state6_2a;
+			} else {
+				config1of3.gameObject.SetActive (true);
+				config2of3.gameObject.SetActive (true);
+				config3of3.gameObject.SetActive (false);
+				config1of3.GetComponent<SpriteRenderer> ().sprite = state6_3a;
+				config2of3.GetComponent<SpriteRenderer> ().sprite = state6_3b;
+			}
+			break;
+		}
+
 	}
 
 	/// <summary>
@@ -957,7 +1148,7 @@ public class Tutorial : MonoBehaviour {
 		case 102:
 			return "First we need to get Blue-Purple Edge ready. Notice that the Blue color of this piece is on the U side. The Purple color is on the Blue side.";
 		case 103:
-			return "We need to move the Blue-Purple Edge so that the color of the piece that is NOT on the U side (in this case Purple) aligns with its matching Center piece.";
+			return "We need to move the Blue-Purple Edge so that the color of the piece that is NOT on the U side (in this case Purple) aligns with its matching Center piece, like either of these configurations.";
 		case 104:
 			return "Notice now there is a vertical stack of three pieces with one matching color (Purple here). This is the condition we must meet before applying our algorithm.";
 		case 105:
@@ -1143,17 +1334,17 @@ public class Tutorial : MonoBehaviour {
 		case 194:
 			return "Take a look at the Yellow Corners of the U side. Rotate the U side until at least TWO Corners are in the right spots, meaning they match their colors on all three of their sides.";
 		case 195:
-			return "The two Top Layer Corners will either be next to each other...";
+			return "The two correct Top Layer Corners can be next to each other, like in this case.";
 		case 196:
-			return "...or across from each other.";
+			return "They can also be across from each other diagonally, which we will see later on.";
 		case 197:
 			return "The top configuration shown on the right applies when the two correct Top Layer Corners are next to each other. The bottom configuration applies when the Corners are across from each other diagonally.";
 		case 198:
-			return "Let's look at an example of the top configuration.";
+			return "Let's look at this example of the top configuration.";
 		case 199:
 			return "Here the two correct Top Layer Corners are the Green-Red-Yellow and the Purple-Green-Yellow Corners.";
 		case 200:
-			return "Rotate the U side until these pieces are on the correct side, which is Green in this case. Then we need to choose the correct F side so that the two correct Top Layer Edges are on the B side.";
+			return "We need to choose the F side so that the two correct Top Layer Edges are on the B side.";
 		case 201:
 			return "The Blue side is the correct F side here.";
 		case 202:
@@ -1163,7 +1354,7 @@ public class Tutorial : MonoBehaviour {
 		case 204:
 			return "Let's look at an example of the bottom configuration. Here the Red-Blue-Yellow and the Purple-Green-Yellow Corners are the two correct Top Layer Corners.";
 		case 205:
-			return "First we need to rotate the U side until the two correct Top Layer Corners are on the right sides. Next we need to perform the same algorithm as before in order to obtain the top configuration.";
+			return "The two correct Top Layer Corners are already on the right sides. We need to perform the same algorithm as before in order to obtain the top configuration.";
 		case 206:
 			return "It does not matter which side we choose as F whenever we have the bottom configuration. Let's go with the Blue side as F.";
 		case 207:
@@ -1189,19 +1380,19 @@ public class Tutorial : MonoBehaviour {
 		case 217:
 			return "Pick any Top Layer Edge. Let's go with the Purple-Yellow Edge.";
 		case 218:
-			return "Since this Top Layer Edge is on the Blue side, we choose the Blue side to be F.";
+			return "Since this Top Layer Edge is on the Red side, we choose the Red side to be F.";
 		case 219:
-			return "There are two possible configurations now.";
+			return "There are three possible configurations now. Either we need to move the Edge clockwise, counterclockwise, or to the B side.";
 		case 220:
-			return "Notice that the Purple side is clockwise to the Bluw side. This matches the top configuration shown on the right.";
+			return "We need to move the Purple-Yellow Edge to the Purple side. Notice that this is the B side. When we have this configuration, we apply either of the algorithms for the clockwise or counterclockwise cases.";
 		case 221:
 			return "Perform the algorithm [F F U L R' F F L' R U F F].";
 		case 222:
-			return "Now there is a single Top Layer Edge in the correct spot. We need to set a new F side so that this correct Top Layer Edge is on the B side.";
+			return "Now the Green-Yellow Edge is in the correct spot. We need to set a new F side so that this correct Top Layer Edge is on the B side.";
 		case 223:
-			return "The Red side is the correct F side here.";
+			return "The Blue side is the correct F side here.";
 		case 224:
-			return "Take a look at the Top Layer Edge on this side. It is the Blue-Yellow Edge. Since the Blue side is clockwise to the Red side, we need to perform the same algorithm as last time.";
+			return "Take a look at the Top Layer Edge on the F side. It is the Purple-Yellow Edge. Since the Purple side is clockwise to the F side, we need to perform the same algorithm as last time.";
 		case 225:
 			return "Perform the algorithm [F F U L R' F F L' R U F F].";
 		case 226:
@@ -2800,7 +2991,6 @@ public class Tutorial : MonoBehaviour {
 				ResetColors (cube18);
 				ResetColors (cube12);
 				ResetColors (cube16);
-				print (u + " " + r + " " + ui + " " + ri + " " + ui + " " + fi + " " + u + " " + f);
 				List<int> moves = new List<int> ();
 				moves.Add (u);
 				moves.Add (r);
@@ -3175,7 +3365,7 @@ public class Tutorial : MonoBehaviour {
 				ResetCube ();
 				AnyColors ();
 				YellowCross ();
-				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCross4 ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCross3 ();
 				StartCoroutine (SwapTopView ());
 				List<int> moves = new List<int> ();
 				moves.Add (u);
@@ -3237,6 +3427,7 @@ public class Tutorial : MonoBehaviour {
 			break;
 		#endregion
 
+		#region Yellow Corners
 		case 151:
 			if (!stepDone) {
 				stepDone = true;
@@ -3656,7 +3847,7 @@ public class Tutorial : MonoBehaviour {
 				ResetCube ();
 				AnyColors ();
 				YellowCorners ();
-				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners7 ();
+//				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners7 ();
 				StartCoroutine (SwapTopView ());
 			}
 			break;
@@ -3812,12 +4003,15 @@ public class Tutorial : MonoBehaviour {
 		case 191:
 			//summary
 			break;
+
+		#endregion
+
+		#region Top Layer
 		case 192:
 			if (!stepDone) {
 				stepDone = true;
 				ResetCube ();
 				ResetColors ();
-				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners11 ();
 				StartCoroutine (SwapTopView ());
 			}
 			break;
@@ -3826,7 +4020,7 @@ public class Tutorial : MonoBehaviour {
 				stepDone = true;
 				ResetCube ();
 				ResetColors ();
-				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer1 ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners11 ();
 				StartCoroutine (SwapTopView ());
 			}
 			break;
@@ -3835,8 +4029,15 @@ public class Tutorial : MonoBehaviour {
 				stepDone = true;
 				ResetCube ();
 				ResetColors ();
-				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer2 ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners11 ();
 				StartCoroutine (SwapTopView ());
+				List<int> moves = new List<int> ();
+				moves.Add (u);
+				moves.Add (u);
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
+				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
+					yield return null;
+				}
 			}
 			break;
 		case 195:
@@ -3844,7 +4045,7 @@ public class Tutorial : MonoBehaviour {
 				stepDone = true;
 				ResetCube ();
 				ResetColors ();
-				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer3 ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer1 ();
 				StartCoroutine (SwapTopView ());
 			}
 			break;
@@ -3853,7 +4054,7 @@ public class Tutorial : MonoBehaviour {
 				stepDone = true;
 				ResetCube ();
 				ResetColors ();
-				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer4 ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer1 ();
 				StartCoroutine (SwapTopView ());
 			}
 			break;
@@ -3862,7 +4063,7 @@ public class Tutorial : MonoBehaviour {
 				stepDone = true;
 				ResetCube ();
 				ResetColors ();
-				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer5 ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer1 ();
 				StartCoroutine (SwapTopView ());
 			}
 			break;
@@ -3871,152 +4072,354 @@ public class Tutorial : MonoBehaviour {
 				stepDone = true;
 				ResetCube ();
 				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer1 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 199:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer1 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 200:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer1 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 201:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer1 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 202:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer1 ();
+				StartCoroutine (SwapTopView ());
+				List<int> moves = new List<int> ();
+				moves.Add (ri);
+				moves.Add (f);
+				moves.Add (ri);
+				moves.Add (b);
+				moves.Add (b);
+				moves.Add (r);
+				moves.Add (fi);
+				moves.Add (ri);
+				moves.Add (b);
+				moves.Add (b);
+				moves.Add (r);
+				moves.Add (r);
+				moves.Add (ui);
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
+				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
+					yield return null;
+				}
+			}
+			break;
+		case 203:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 204:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer2 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 205:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer2 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 206:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer2 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 207:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer2 ();
+				StartCoroutine (SwapTopView ());
+				List<int> moves = new List<int> ();
+				moves.Add (ri);
+				moves.Add (f);
+				moves.Add (ri);
+				moves.Add (b);
+				moves.Add (b);
+				moves.Add (r);
+				moves.Add (fi);
+				moves.Add (ri);
+				moves.Add (b);
+				moves.Add (b);
+				moves.Add (r);
+				moves.Add (r);
+				moves.Add (ui);
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
+				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
+					yield return null;
+				}
+			}
+			break;
+		case 208:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer3 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 209:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer3 ();
+				StartCoroutine (SwapTopView ());
+				List<int> moves = new List<int> ();
+				moves.Add (ui);
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
+				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
+					yield return null;
+				}
+			}
+			break;
+		case 210:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer4 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 211:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer4 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 212:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer4 ();
+				StartCoroutine (SwapTopView ());
+				List<int> moves = new List<int> ();
+				moves.Add (ri);
+				moves.Add (f);
+				moves.Add (ri);
+				moves.Add (b);
+				moves.Add (b);
+				moves.Add (r);
+				moves.Add (fi);
+				moves.Add (ri);
+				moves.Add (b);
+				moves.Add (b);
+				moves.Add (r);
+				moves.Add (r);
+				moves.Add (ui);
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
+				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
+					yield return null;
+				}
+			}
+			break;
+		case 213:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 214:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer5 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 215:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer5 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 216:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer5 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 217:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer5 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 218:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer5 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 219:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer5 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 220:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer5 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 221:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer5 ();
+				StartCoroutine (SwapTopView ());
+				List<int> moves = new List<int> ();
+				moves.Add (f);
+				moves.Add (f);
+				moves.Add (u);
+				moves.Add (l);
+				moves.Add (ri);
+				moves.Add (f);
+				moves.Add (f);
+				moves.Add (li);
+				moves.Add (r);
+				moves.Add (u);
+				moves.Add (f);
+				moves.Add (f);
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
+				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
+					yield return null;
+				}
+			}
+			break;
+		case 222:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
 				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer6 ();
 				StartCoroutine (SwapTopView ());
 			}
 			break;
-
-
-
-//		case 128:
-//			if (!stepDone) {
-//				stepDone = true;
-//				ResetCube ();
-//				ResetColors ();
-//				solver.GetComponent<TutorialScrambler> ().Tutor_MiddleLayer8 ();
-//				StartCoroutine (SwapTopView ());
-//			}
-//			break;
-//		case 129:
-//			if (!stepDone) {
-//				stepDone = true;
-//				ResetCube ();
-//				AnyColors ();
-//				YellowCross ();
-//				solver.GetComponent<TutorialScrambler> ().Tutor_MiddleLayer8 ();
-//				StartCoroutine (SwapTopView ());
-//			}
-//			break;
-//		case 130:
-//			if (!stepDone) {
-//				stepDone = true;
-//				ResetCube ();
-//				AnyColors ();
-//				YellowCorners ();
-//				solver.GetComponent<TutorialScrambler> ().Tutor_MiddleLayer8 ();
-//				StartCoroutine (SwapTopView ());
-//			}
-//			break;
-//		case 131:
-//			if (!stepDone) {
-//				stepDone = true;
-//				ResetCube ();
-//				AnyColors ();
-//				YellowCross ();
-//				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCross1 ();
-//				StartCoroutine (SwapTopView ());
-//			}
-//			break;
-//		case 132:
-//			if (!stepDone) {
-//				stepDone = true;
-//				ResetCube ();
-//				AnyColors ();
-//				YellowCross ();
-//				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCross2 ();
-//				StartCoroutine (SwapTopView ());
-//			}
-//			break;
-//		case 133:
-//			if (!stepDone) {
-//				stepDone = true;
-//				ResetCube ();
-//				AnyColors ();
-//				YellowCross ();
-//				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCross3 ();
-//				StartCoroutine (SwapTopView ());
-//			}
-//			break;
-//		case 134:
-//			if (!stepDone) {
-//				stepDone = true;
-//				ResetCube ();
-//				AnyColors ();
-//				YellowCross ();
-//				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCross4 ();
-//				StartCoroutine (SwapTopView ());
-//			}
-//			break;
-//		case 135:
-//			if (!stepDone) {
-//				stepDone = true;
-//				ResetCube ();
-//				AnyColors ();
-//				YellowCross ();
-//				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCross5 ();
-//				StartCoroutine (SwapTopView ());
-//			}
-//			break;
-//		case 136:
-//			if (!stepDone) {
-//				stepDone = true;
-//				ResetCube ();
-//				AnyColors ();
-//				YellowCorners ();
-//				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners1 ();
-//				StartCoroutine (SwapTopView ());
-//			}
-//			break;
-//		case 137:
-//			if (!stepDone) {
-//				stepDone = true;
-//				ResetCube ();
-//				AnyColors ();
-//				YellowCorners ();
-//				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners2 ();
-//				StartCoroutine (SwapTopView ());
-//			}
-//			break;
-//		case 138:
-//			if (!stepDone) {
-//				stepDone = true;
-//				ResetCube ();
-//				ResetColors ();
-//				AnyColors ();
-//				YellowCorners ();
-//				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners3 ();
-//				StartCoroutine (SwapTopView ());
-//			}
-//			break;
-//		case 139:
-//			if (!stepDone) {
-//				stepDone = true;
-//				ResetCube ();
-//				AnyColors ();
-//				YellowCorners ();
-//				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners4 ();
-//				StartCoroutine (SwapTopView ());
-//			}
-//			break;
-//		case 140:
-//			if (!stepDone) {
-//				stepDone = true;
-//				ResetCube ();
-//				AnyColors ();
-//				YellowCorners ();
-//				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners5 ();
-//				StartCoroutine (SwapTopView ());
-//			}
-//			break;
-//		case 141:
-//			if (!stepDone) {
-//				stepDone = true;
-//				ResetCube ();
-//				ResetColors ();
-//				solver.GetComponent<TutorialScrambler> ().Tutor_YellowCorners5 ();
-//				StartCoroutine (SwapTopView ());
-//			}
-//			break;
+		case 223:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer6 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 224:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer6 ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		case 225:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				solver.GetComponent<TutorialScrambler> ().Tutor_TopLayer6 ();
+				StartCoroutine (SwapTopView ());
+				List<int> moves = new List<int> ();
+				moves.Add (f);
+				moves.Add (f);
+				moves.Add (u);
+				moves.Add (l);
+				moves.Add (ri);
+				moves.Add (f);
+				moves.Add (f);
+				moves.Add (li);
+				moves.Add (r);
+				moves.Add (u);
+				moves.Add (f);
+				moves.Add (f);
+				StartCoroutine (solver.GetComponent<TutorialSolver> ().PerformAlgorithm (moves));
+				while (solver.GetComponent<TutorialSolver> ().IsSolving ()) {
+					yield return null;
+				}
+			}
+			break;
+		case 226:
+			if (!stepDone) {
+				stepDone = true;
+				ResetCube ();
+				ResetColors ();
+				StartCoroutine (SwapTopView ());
+			}
+			break;
+		#endregion
 		}
 		yield return null;
 	}
@@ -4542,7 +4945,7 @@ public class Tutorial : MonoBehaviour {
 	/// Skips to a particular phase. Used for debugging.
 	/// </summary>
 	public void SkipToPhaseII () {
-		tutorialStep = 192;
+		tutorialStep = 175;
 	}
 
 	/// <summary>
